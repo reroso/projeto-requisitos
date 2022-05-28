@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, body {
+  height: 100%;
+}
+.flex-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: dodgerblue;
+  flex-direction: column;
+  align-items: center;
+}
+.div_cabecalho {
+    display: flex;
+    background-color: #6c7586;
+    width: 100%;
+    height: 10%;
+    border-style: solid;
+    border-width: 3px;
+    flex-direction: row;
+}
+.cabecalho_1{
+    font-weight: bold;
+    width: 40%;
+    height: 100%;
+    font-size: 30px;
+}
+.cabecalho_2{
+    display: flex;
+    width: 30%;
+    height: 100%;
+    align-items: center;
+}
+.cabecalho_3{
+    display: flex;
+    width: 18%;
+    height: 100%;
+    align-items: center;
+}
+.cabecalho_4{
+    display: flex;
+    width: 12%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+.cabecalho_4_1{
+    width: 100%;
+    height: 50%;
+}
+.cabecalho_4_2{
+    width: 100%;
+    height: 50%;
+}
+.div_titulos {
+    display: flex;
+    background-color: #e1e0e0;
+    width: 100%;
+    height: 4%;
+    border-style: none solid solid solid;
+    border-width: 3px;
+    flex-direction: row;
+}
+.titulo_1{
+    width: 30%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.titulo_2{
+    align-items: center;
+    display: flex;
+}
+.titulo_3{
+    width: 30%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.titulo_4{
+    align-items: center;
+    display: flex;
+}
+.titulo_5{
+    width: 30%;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.seta-direita:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 0; 
+  height: 0; 
+
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 12px solid black;
+  
+}
+.div_conteudo {
+    display: flex;
+    width: 100%;
+    height: 86%;
+    flex-direction: row;
+    border-style: none solid solid solid;
+    border-width: 3px;
+}
+.entrada{
+    display: flex;
+    background-color: #a3a5a3;
+    width: 33.34%;
+    flex-direction: column;
+}
+.entradas_principais {
+    display: flex;
+    height: 50%;
+    flex-direction: row;
+}
+.entrada_fornecedor{
+    background-color: #e1e0e0;
+    width: 50%;
+    border-style: none groove solid none;
+    border-width: 0px 2px 3px 0px;
+    overflow: auto;
+}
+.entrada_insumo{
+    background-color: #e1e0e0;
+    width: 50%;
+    border-style: none groove solid none;
+    border-width: 0px 2px 3px 0px;
+    overflow: auto;
+}
+.entrada_rh{
+    background-color: #e1e0e0;
+    height: 25%;
+    border-style: none solid groove none;
+    border-width: 0px 3px 2px 0px;
+    overflow: auto;
+}
+.entrada_rt{
+    background-color: #e1e0e0;
+    height: 25%;
+    overflow: auto;
+}
+.processamento {
+    display: flex;
+    background-color: #a3a5a3;
+    width: 33.33%;
+    flex-direction: column;
+}
+.processamento_Atividade{
+    background-color: #e1e0e0;
+    height: 75%;
+    border-style: none none solid none;
+    border-width: 0px 0px 3px 0px;
+    overflow: auto;
+}
+.processamento_finalidade{
+    background-color: #e1e0e0;
+    height: 25%;
+    border-style: none groove none groove;
+    border-width: 0px 2px 0px 2px;
+    overflow: auto;
+}
+.saida {
+    display: flex;
+    background-color: #a3a5a3;
+    width: 33.33%;
+    flex-direction: column;
+}
+.saidas_principais{
+    display: flex;
+    height: 50%;
+    flex-direction: row;
+}
+.saida_produto{
+    background-color: #e1e0e0;
+    width: 50%;
+    border-style: none groove solid groove;
+    border-width: 0px 2px 3px 2px;
+    overflow: auto;
+}
+.saida_cliente{
+    background-color: #e1e0e0;
+    width: 50%;
+    border-style: none none solid none;
+    border-width: 0px 0px 3px 0px;
+    overflow: auto;
+}
+.saida_performance{
+    background-color: #e1e0e0;
+    height: 25%;
+    border-style: none none groove solid;
+    border-width: 0px 0px 2px 3px;
+    overflow: auto;
+}
+.saida_controle{
+    background-color: #e1e0e0;
+    height: 25%;
+    overflow: auto;
+}
+#dropzoneFornecedores{
+      padding: 16px;
+      height: 66%;
+      width: 72%;
+      margin: 0;
+}
+#dropzoneInsumos{
+      padding: 16px;
+      height: 66%;
+      width: 72%;
+      margin: 0;
+}
+#dropzoneHumanos{
+      padding: 16px;
+      height: 44%;
+      width: 86%;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+}
+#dropzoneTecnologicos{
+      padding: 16px;
+      height: 44%;
+      width: 86%;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+}
+#dropzoneAtividades{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 16px;
+      height: 81.1%;
+      width: 86%;
+      margin: 0;
+}
+#dropzoneFinalidades{
+      padding: 16px;
+      height: 44%;
+      width: 86%;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+}
+#dropzoneProdutos{
+      padding: 16px;
+      height: 66%;
+      width: 72%;
+      margin: 0;
+}
+#dropzoneClientes{
+      padding: 16px;
+      height: 72%;
+      width: 72%;
+      margin: 0;
+}
+#dropzonePerformances{
+      padding: 16px;
+      height: 44%;
+      width: 86%;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+}
+#dropzoneControles{
+      padding: 16px;
+      height: 44%;
+      width: 86%;
+      margin: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+}
+p{
+    font-size: 20px;
+    font-weight: bold;
+}
+#card{
+    padding: 16px;
+    box-shadow: 0 2px 2px -1px;
+    width: 210px;
+    min-height: 10px;
+    margin: 25px 0;
+    border-radius: 10px;
+    font-weight: 200;
+    font-size: 10px;
+}
+.cardFornecedoresColor{
+    background-color: #5b778c;
+}
+.cardInsumosColor{
+    background-color: #5b778c;
+}
+.cardHumanosColor{
+    background-color: #205895;
+}
+.cardTecnologicosColor{
+    background-color: #5c6375;
+}
+.cardAtividadesColor{
+    background-color: #a08665;
+}
+.cardFinalidadesColor{
+    background-color: #8d5d3e;
+}
+.cardProdutosColor{
+    background-color: #5c7e77;
+}
+.cardClientesColor{
+    background-color: #5c7e77;
+}
+.cardPerformancesColor{
+    background-color: #305e41;
+}
+.cardControlesColor{
+    background-color: #437189;
+}
+.mainContent{
+    float:left;
+}
+.hidden{
+    display: none;
+}
+textarea{
+    width: 100%; 
+    height: 40px;
+    background: transparent;
+    font-size: 15px;
+    border: none;
+    overflow: auto;
+    resize: none;
+    margin: 0;
+}
+.cima_card{
+    float: right;
+    color: black;
+    font-size: 13px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+.white_div_2{
+    display: flex;
+    width: 95%;
+    height: 85%;
+    flex-direction: row;
+}
+.white_div_2_1{
+    width: 30%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.white_div_2_2{
+    width: 70%;
+    height: 100%;
+}
+.input_nome_cabecalho_2{
+    width: 10%;
+}
+.white_div_3{
+    display: flex;
+    width: 95%;
+    height: 85%;
+    flex-direction: row;
+}
+.white_div_3_1{
+    width: 30%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.white_div_3_2{
+    width: 70%;
+    height: 100%;
+}
+.input_nome_cabecalho_3{
+    width: 100%;
+    height: 100%;
+}
+.white_div_4{
+    width: 95%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+}
+.white_div_4_1{
+    width: 30%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.white_div_4_2{
+    width: 70%;
+    height: 100%;
+}
+.input_data_cabecalho_4{
+    width: 100%;
+    height: 100%;
+}
+.white_div_5{
+    width: 95%;
+    height: 85%;
+    display: flex;
+    flex-direction: row;
+}
+.white_div_5_1{
+    width: 30%;
+    height: 100%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.white_div_5_2{
+    width: 70%;
+    height: 100%;
+}
+.input_nome_cabecalho_5{
+    width: 100%;
+    height: 100%;
+}
+input[type=text] {
+width: 100%;
+}
+
+</style>
+</head>
+<body>
+
+<div class="flex-container">
+    <div class="div_cabecalho">  
+        <div class="cabecalho_1">PROCESS MAP MODEL CANVAS</div>
+        <div class="cabecalho_2">
+            <div class="white_div_2">
+                <div class="white_div_2_1">
+                    <label>Nome do Processo:</label>
+                </div>
+                <div class="white_div_2_2">
+                    <input type="text" id="input_nome_cabecalho_2" name="name">
+                </div>
+            </div>    
+        </div>
+        <div class="cabecalho_3">
+            <div class="white_div_3">
+                <div class="white_div_3_1">
+                    <label>Elaborado por:</label>
+                </div>
+                <div class="white_div_3_2">
+                    <input type="text" id="input_nome_cabecalho_3" name="name">
+                </div>
+            </div>  
+        </div>
+        <div class="cabecalho_4">
+            <div class="cabecalho_4_1">
+                <div class="white_div_4">
+                    <div class="white_div_4_1">
+                        <label>Em:</label>
+                    </div>
+                    <div class="white_div_4_2">
+                        <input type="date" id="input_data_cabecalho_4" name="name">
+                    </div>
+                    </div>  
+            </div>
+            <div class="cabecalho_4_2">
+                <div class="white_div_5">
+                    <div class="white_div_5_1">
+                        <label>Versão:</label>
+                    </div>
+                    <div class="white_div_5_2">
+                        <input type="text" id="input_nome_cabecalho_5" name="name">
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="div_titulos">
+        <div class="titulo_1">ENTRADAS</div>
+        <div class="titulo_2">
+            <div class="seta-direita"></div>
+        </div>
+        <div class="titulo_3">PROCESSAMENTO</div>
+        <div class="titulo_4">
+            <div class="seta-direita"></div>
+        </div>
+        <div class="titulo_5">SAÍDAS</div>
+    </div>
+    <div class="div_conteudo">
+        <div class="entrada">
+            <div class="entradas_principais">
+                <div class="entrada_fornecedor">
+                    <p>Principais Fornecedores</p>
+                    <div id="mainContent">
+                        <button id="clickButtonFornecedores" class="buttonStyle">+</button>
+                    </div>
+                    <div id="dropzoneFornecedores" class="dropzone" data-dropnome="fornecedor">
+                        
+                        <% @fornecedores.each do |fornecedor| %>
+        
+                          <div id="template-card-fornecedores-existentes">
+                            <div id ="card" class="card cardFornecedoresColor" draggable="true" data-id = <%=fornecedor.id%>>
+                              <div class="content">
+                                <fieldset>
+                                  <form action="/main_screen/<%= fornecedor.id %>/salvar_fornecedor" method="post" class="formulario">
+                                    <div class="cima_card">
+                                      <a href="/main_screen/<%= fornecedor.id %>/excluir_fornecedor">x</a>
+                                    </div>
+                                    <div>
+                                      <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= fornecedor.descricao %></textarea>
+                                    </div>
+                                  </form>
+                                </fieldset>
+                              </div>
+                            </div>
+                          </div>
+                        
+                        <% end %>
+ 
+                    </div>
+                </div>
+                <div class="entrada_insumo">
+                    <p>Principais Insumos</p>
+                    <div id="mainContent">
+                        <button id="clickButtonInsumos" class="buttonStyle">+</button>
+                    </div>
+                    <div id="dropzoneInsumos" class="dropzone" data-dropnome="insumo">
+                        <% @insumos.each do |insumo| %>
+        
+                            <div id="template-card-insumos-existentes">
+                                <div id ="card" class="card cardInsumosColor" draggable="true" data-id = <%=insumo.id%>>
+                                <div class="content">
+                                    <fieldset>
+                                    <form action="/main_screen/<%= insumo.id %>/salvar_insumo" method="post" class="formulario">
+                                        <div class="cima_card">
+                                        <a href="/main_screen/<%= insumo.id %>/excluir_insumo">x</a>
+                                        </div>
+                                        <div>
+                                        <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= insumo.descricao %></textarea>
+                                        </div>
+                                    </form>
+                                    </fieldset>
+                                </div>
+                                </div>
+                            </div>
+
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <div class="entrada_rh">
+                <p>Recursos Humanos</p>
+                <div id="mainContent">
+                    <button id="clickButtonHumanos" class="buttonStyle">+</button>
+                </div>
+                <div id="dropzoneHumanos" class="dropzone" data-dropnome="humano">
+                    
+                    <% @humanos.each do |humano| %>
+        
+                        <div id="template-card-humanos-existentes">
+                            <div id ="card" class="card cardHumanosColor" draggable="true" data-id = <%=humano.id%>>
+                            <div class="content">
+                                <fieldset>
+                                <form action="/main_screen/<%= humano.id %>/salvar_humano" method="post" class="formulario">
+                                    <div class="cima_card">
+                                    <a href="/main_screen/<%= humano.id %>/excluir_humano">x</a>
+                                    </div>
+                                    <div>
+                                    <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= humano.descricao %></textarea>
+                                    </div>
+                                </form>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+
+                    <% end %>
+
+                </div>
+            </div>
+            <div class="entrada_rt">
+                <p>Recursos Tecnológicos</p>
+                <div id="mainContent">
+                    <button id="clickButtonTecnologicos" class="buttonStyle">+</button>
+                </div>
+                <div id="dropzoneTecnologicos" class="dropzone" data-dropnome="tecnologico">
+                    
+                    <% @tecnologicos.each do |tecnologico| %>
+        
+                        <div id="template-card-tecnologicos-existentes">
+                            <div id ="card" class="card cardTecnologicosColor" draggable="true" data-id = <%=tecnologico.id%>>
+                            <div class="content">
+                                <fieldset>
+                                <form action="/main_screen/<%= tecnologico.id %>/salvar_tecnologico" method="post" class="formulario">
+                                    <div class="cima_card">
+                                    <a href="/main_screen/<%= tecnologico.id %>/excluir_tecnologico">x</a>
+                                    </div>
+                                    <div>
+                                    <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= tecnologico.descricao %></textarea>
+                                    </div>
+                                </form>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+
+                    <% end %>
+                    
+                </div>
+            </div>    
+        </div>
+        <div class="processamento">
+            <div class="processamento_Atividade">
+                <p>Principais Atividades</p>
+                <div id="mainContent">
+                    <button id="clickButtonAtividades" class="buttonStyle">+</button>
+                </div>
+                <div id="dropzoneAtividades" class="dropzone" data-dropnome="atividade">
+
+                    <% @atividades.each do |atividade| %>
+        
+                        <div id="template-card-atividades-existentes">
+                            <div id ="card" class="card cardAtividadesColor" draggable="true" data-id = <%=atividade.id%>>
+                            <div class="content">
+                                <fieldset>
+                                <form action="/main_screen/<%= atividade.id %>/salvar_atividade" method="post" class="formulario">
+                                    <div class="cima_card">
+                                    <a href="/main_screen/<%= atividade.id %>/excluir_atividade">x</a>
+                                    </div>
+                                    <div>
+                                    <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= atividade.descricao %></textarea>
+                                    </div>
+                                </form>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+
+                    <% end %>
+
+                </div>
+            </div>
+            <div class="processamento_finalidade">
+                <p>Finalidade e Melhorias</p>
+                <div id="mainContent">
+                    <button id="clickButtonFinalidades" class="buttonStyle">+</button>
+                </div>
+                <div id="dropzoneFinalidades" class="dropzone" data-dropnome="finalidade">
+                    <% @finalidades.each do |finalidade| %>
+        
+                        <div id="template-card-finalidades-existentes">
+                            <div id ="card" class="card cardFinalidadesColor" draggable="true" data-id = <%=finalidade.id%>>
+                            <div class="content">
+                                <fieldset>
+                                <form action="/main_screen/<%= finalidade.id %>/salvar_finalidade" method="post" class="formulario">
+                                    <div class="cima_card">
+                                    <a href="/main_screen/<%= finalidade.id %>/excluir_finalidade">x</a>
+                                    </div>
+                                    <div>
+                                    <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= finalidade.descricao %></textarea>
+                                    </div>
+                                </form>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+        <div class="saida">
+            <div class="saidas_principais">
+                <div class="saida_produto">
+                    <p>Principais Produtos</p>
+                    <div id="mainContent">
+                        <button id="clickButtonProdutos" class="buttonStyle">+</button>
+                    </div>
+                    <div id="dropzoneProdutos" class="dropzone" data-dropnome="produto">
+                        <% @produtos.each do |produto| %>
+        
+                            <div id="template-card-produtos-existentes">
+                                <div id ="card" class="card cardProdutosColor" draggable="true" data-id = <%=produto.id%>>
+                                <div class="content">
+                                    <fieldset>
+                                    <form action="/main_screen/<%= produto.id %>/salvar_produto" method="post" class="formulario">
+                                        <div class="cima_card">
+                                        <a href="/main_screen/<%= produto.id %>/excluir_produto">x</a>
+                                        </div>
+                                        <div>
+                                        <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= produto.descricao %></textarea>
+                                        </div>
+                                    </form>
+                                    </fieldset>
+                                </div>
+                                </div>
+                            </div>
+
+                        <% end %>
+
+                    </div>
+                </div>
+                <div class="saida_cliente">
+                    <p>Principais Clientes</p>
+                    <div id="mainContent">
+                        <button id="clickButtonClientes" class="buttonStyle">+</button>
+                    </div>
+                    <div id="dropzoneClientes" class="dropzone" data-dropnome="cliente">
+
+                        <% @clientes.each do |cliente| %>
+        
+                            <div id="template-card-clientes-existentes">
+                                <div id ="card" class="card cardClientesColor" draggable="true" data-id = <%=cliente.id%>>
+                                <div class="content">
+                                    <fieldset>
+                                    <form action="/main_screen/<%= cliente.id %>/salvar_cliente" method="post" class="formulario">
+                                        <div class="cima_card">
+                                        <a href="/main_screen/<%= cliente.id %>/excluir_cliente">x</a>
+                                        </div>
+                                        <div>
+                                        <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= cliente.descricao %></textarea>
+                                        </div>
+                                    </form>
+                                    </fieldset>
+                                </div>
+                                </div>
+                            </div>
+
+                        <% end %>
+
+                    </div>
+                </div>
+            </div> 
+            <div class="saida_performance">
+                <p>Indicadores de Performance</p>
+                <div id="mainContent">
+                    <button id="clickButtonPerformances" class="buttonStyle">+</button>
+                </div>
+                <div id="dropzonePerformances" class="dropzone" data-dropnome="performance">
+                    <% @performances.each do |performance| %>
+        
+                        <div id="template-card-performances-existentes">
+                            <div id ="card" class="card cardPerformancesColor" draggable="true" data-id = <%=performance.id%>>
+                            <div class="content">
+                                <fieldset>
+                                <form action="/main_screen/<%= performance.id %>/salvar_performance" method="post" class="formulario">
+                                    <div class="cima_card">
+                                    <a href="/main_screen/<%= performance.id %>/excluir_performance">x</a>
+                                    </div>
+                                    <div>
+                                    <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= performance.descricao %></textarea>
+                                    </div>
+                                </form>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+
+                    <% end %>
+
+                </div>
+            </div>
+            <div class="saida_controle">
+                <p>Indicadores de Controle</p>
+                <div id="mainContent">
+                    <button id="clickButtonControles" class="buttonStyle">+</button>
+                </div>
+                <div id="dropzoneControles" class="dropzone" data-dropnome="controle">
+                    <% @controles.each do |controle| %>
+        
+                        <div id="template-card-controles-existentes">
+                            <div id ="card" class="card cardControlesColor" draggable="true" data-id = <%=controle.id%>>
+                            <div class="content">
+                                <fieldset>
+                                <form action="/main_screen/<%= controle.id %>/salvar_controle" method="post" class="formulario">
+                                    <div class="cima_card">
+                                    <a href="/main_screen/<%= controle.id %>/excluir_controle">x</a>
+                                    </div>
+                                    <div>
+                                    <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"> <%= controle.descricao %></textarea>
+                                    </div>
+                                </form>
+                                </fieldset>
+                            </div>
+                            </div>
+                        </div>
+
+                    <% end %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-fornecedor-novo">
+    <div id ="card" class="card cardFornecedoresColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_fornecedor" method="post" class="formulario formCloneMC">
+            <div>
+                <textarea type="text" class="formInputDescricao" name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>        
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-insumo-novo">
+    <div id ="card" class="card cardInsumosColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_insumo" method="post" class="formulario">
+            <div>
+                <textarea type="text" name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-humano-novo">
+    <div id ="card" class="card cardHumanosColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_humano" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-tecnologico-novo">
+    <div id ="card" class="card cardTecnologicosColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_tecnologico" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-atividade-novo">
+    <div id ="card" class="card cardAtividadesColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_atividade" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-finalidade-novo">
+    <div id ="card" class="card cardFinalidadesColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_finalidade" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-produto-novo">
+    <div id ="card" class="card cardProdutosColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_produto" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-cliente-novo">
+    <div id ="card" class="card cardClientesColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_cliente" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-performance-novo">
+    <div id ="card" class="card cardPerformancesColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_performance" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<div class ="hidden" id="template-card-controle-novo">
+    <div id ="card" class="card cardControlesColor">
+        <div class="content">
+        <fieldset>
+            <form action="/main_screen/incluir_controle" method="post" class="formulario">
+            <div>
+                <textarea type="text"  name="descricao" style="background-color:transparent; border: none;"></textarea>
+            </div>           
+            </form>
+        </fieldset>
+        </div>
+    </div>
+</div>
+
+<script>  
+    clickButtonFornecedores.addEventListener('click', addFornecedores, false);
+
+        function addFornecedores(e) {
+
+        var temp = document.getElementById('template-card-fornecedor-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneFornecedores');
+        tempDestiny.appendChild(tempClone);
+        addEventListenerToForm();      
+        }
+    clickButtonInsumos.addEventListener('click', addInsumos, false);
+        
+        function addInsumos(e) {
+
+        var temp = document.getElementById('template-card-insumo-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneInsumos');
+        tempDestiny.appendChild(tempClone);   
+        addEventListenerToForm();   
+        }
+    clickButtonHumanos.addEventListener('click', addHumanos, false);
+        
+        function addHumanos(e) {
+ 
+        var temp = document.getElementById('template-card-humano-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneHumanos');
+        tempDestiny.appendChild(tempClone);
+        addEventListenerToForm();      
+        }
+    clickButtonTecnologicos.addEventListener('click', addTecnologicos, false);
+        
+        function addTecnologicos(e) {
+ 
+        var temp = document.getElementById('template-card-tecnologico-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneTecnologicos');
+        tempDestiny.appendChild(tempClone);
+        addEventListenerToForm();      
+        }
+    clickButtonAtividades.addEventListener('click', addAtividades, false);
+        
+        function addAtividades(e) {
+ 
+        var temp = document.getElementById('template-card-atividade-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneAtividades');
+        tempDestiny.appendChild(tempClone);
+        addEventListenerToForm();      
+        }
+    clickButtonFinalidades.addEventListener('click', addFinalidades, false);
+        
+        function addFinalidades(e) {
+ 
+        var temp = document.getElementById('template-card-finalidade-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneFinalidades');
+        tempDestiny.appendChild(tempClone);
+        addEventListenerToForm();      
+        }
+ 
+    clickButtonProdutos.addEventListener('click', addProdutos, false);
+        
+        function addProdutos(e) {
+ 
+        var temp = document.getElementById('template-card-produto-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneProdutos');
+        tempDestiny.appendChild(tempClone);
+        addEventListenerToForm();      
+        }
+    
+    clickButtonClientes.addEventListener('click', addClientes, false);
+        
+       function addClientes(e) {
+
+       var temp = document.getElementById('template-card-cliente-novo');
+       var tempClone = temp.cloneNode(true);
+       tempClone.classList.remove('hidden');
+       var tempDestiny = document.getElementById('dropzoneClientes');
+       tempDestiny.appendChild(tempClone);
+       addEventListenerToForm();      
+       }
+    
+    clickButtonPerformances.addEventListener('click', addPerformances, false);
+        
+       function addPerformances(e) {
+
+       var temp = document.getElementById('template-card-performance-novo');
+       var tempClone = temp.cloneNode(true);
+       tempClone.classList.remove('hidden');
+       var tempDestiny = document.getElementById('dropzonePerformances');
+       tempDestiny.appendChild(tempClone);
+       addEventListenerToForm();      
+       }
+
+    clickButtonControles.addEventListener('click', addControles, false);
+        
+        function addControles(e) {
+ 
+        var temp = document.getElementById('template-card-controle-novo');
+        var tempClone = temp.cloneNode(true);
+        tempClone.classList.remove('hidden');
+        var tempDestiny = document.getElementById('dropzoneControles');
+        tempDestiny.appendChild(tempClone);
+        addEventListenerToForm();      
+        }
+
+    
+    var formulario = document.getElementsByClassName('formulario');
+        for (var i = 0; i< formulario.length; i++){
+          formulario[i].addEventListener('keydown', e => {
+                if(e.key == "Enter") {
+                    e.target.parentElement.parentElement.submit();
+                }
+            })
+        }
+      
+    function addEventListenerToForm() {
+    
+    var formulario = document.getElementsByClassName('formulario');
+    for (var i = 0; i< formulario.length; i++){
+        formulario[i].addEventListener('keydown', e => {
+            if(e.key == "Enter") {
+                console.log(e.target.parentElement);
+                e.target.parentElement.parentElement.submit();
+            }
+        })
+    }
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    function log(message){
+        console.log('> ' + message)
+      }
+
+      const cards = document.querySelectorAll('.card')
+      const dropzones = document.querySelectorAll('.dropzone')
+
+      cards.forEach(card => {
+          card.addEventListener('dragstart', dragstart)
+          card.addEventListener('drag', drag)
+          card.addEventListener('dragend', dragend)
+      })
+      
+      let dropzoneOrigen;
+      let cardDelete;
+
+      function dragstart(e){
+       // log('CARD: Start dragging')
+
+        this.classList.add('is-dragging')
+        dropzoneOrigen = e.target.parentElement.parentElement;
+        cardDelete = e.target.dataset.id;
+        console.log(e);
+      }
+
+      function drag(){
+       // log('CARD: Is dragging')
+
+      }
+
+      function dragend(e){
+       // log('CARD: Stop dragging')
+
+        this.classList.remove('is-dragging')
+                
+        let dropzoneDestinyName = e.path[1]; //mostra o nome da dropzone que joguei xx
+
+        //console.log(e.toElement.childNodes[1].children[1]);
+
+        let cardDescricaoValue = e.toElement.childNodes[2].previousElementSibling.children[0].children[0][0].defaultValue; //mostrar o valor do card descricao xx
+              let form = document.getElementsByClassName("formCloneMC")[0];
+              console.log(document.getElementsByClassName("formCloneMC")[0]);
+              let formClone = form.cloneNode(true);
+              formClone.action = `/main_screen/alterar_${dropzoneDestinyName.dataset.dropnome}`;
+              formClone.getElementsByClassName("formInputDescricao")[0].innerHTML = cardDescricaoValue;
+              formClone.name = "formClone";             
+              document.body.appendChild(formClone);
+              formClone.submit();
+           
+            
+            formClone.action = `/main_screen/${cardDelete}/excluir_${dropzoneOrigen.dataset.dropnome}`;
+            formClone.method = "get"
+            console.log(formClone);
+            console.log(cardDelete);
+              setTimeout(function(){
+                 formClone.submit();
+              },1000);
+                
+      }
+
+
+      dropzones.forEach( dropzone => {
+        dropzone.addEventListener('dragenter', dragenter)
+        dropzone.addEventListener('dragover', dragover)
+        dropzone.addEventListener('dragleave', dragleave)
+        dropzone.addEventListener('drop', e=>{console.log(e)})
+
+      })
+
+      function dragenter(){
+       // log('DROPZONE: Enter in zone')
+
+      }
+
+      function dragover(){
+       // log('DROPZONE: Over')
+
+       const cardBeingDragged = document.querySelector('.is-dragging')
+
+       this.appendChild(cardBeingDragged)
+      }
+
+      function dragleave(){
+       // log('DROPZONE: Leave')
+      }
+    
+    
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+class Finalidade < ApplicationRecord
+end

@@ -1,0 +1,2 @@
+class Humano < ApplicationRecord
+end
