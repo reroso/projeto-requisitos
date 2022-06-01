@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_25_002529) do
+ActiveRecord::Schema.define(version: 2022_05_31_164848) do
 
   create_table "atividades", force: :cascade do |t|
     t.string "descricao"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 2022_02_25_002529) do
   end
 
   create_table "controles", force: :cascade do |t|
+    t.string "descricao"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "dimensaos", force: :cascade do |t|
     t.string "descricao"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -60,10 +66,26 @@ ActiveRecord::Schema.define(version: 2022_02_25_002529) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "processos", force: :cascade do |t|
+    t.string "descricao"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "dimensao_id", null: false
+    t.index ["dimensao_id"], name: "index_processos_on_dimensao_id"
+  end
+
   create_table "produtos", force: :cascade do |t|
     t.string "descricao"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "resultados", force: :cascade do |t|
+    t.string "descricao"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "processo_id", null: false
+    t.index ["processo_id"], name: "index_resultados_on_processo_id"
   end
 
   create_table "tecnologicos", force: :cascade do |t|
@@ -72,4 +94,6 @@ ActiveRecord::Schema.define(version: 2022_02_25_002529) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "processos", "dimensaos"
+  add_foreign_key "resultados", "processos"
 end

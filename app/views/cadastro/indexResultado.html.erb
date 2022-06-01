@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, body {
+  height: 100%;
+  width: 100%;
+}
+.flex-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.div_cabecalho {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    border-style: solid;
+    border-width: 3px;
+    flex-direction: row;
+}
+.div_cabecalho_1 {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: row;
+}
+.div_cabecalho_2 {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: row;
+}
+.div_corpo {
+    display: flex;
+    width: 100%;
+    height: 90%;
+    border-style: solid;
+    border-width: 3px;
+    flex-direction: column;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+th, td{
+    padding: 10px 20px;
+    border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+    
+<div class="flex-container">
+   <div class="div_cabecalho">
+        <div class="div_cabecalho_1">
+            <h1>Cadastrar Resultado</h1>
+        </div>   
+
+        <div class="div_cabecalho_1">
+            
+            <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario">
+            <div>
+                
+                <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo" %>
+                
+                <input type="text" name="processo_id" readonly="readonly" id="inputElProcesso" class="inputElProcesso">
+                <input type="text" name="descricao" placeholder="Digite o resultado">  
+                <a href="/cadastro/">Voltar para Dimensao</a>
+                <a href="/cadastroProcesso/">Voltar para Processo</a>
+                 
+            </div>           
+            </form>
+                                
+        </div> 
+   </div> 
+
+   <div class="div_corpo">
+        <table id="body">
+            
+            <% @resultados.each do |resultado| %>                
+                    <input type="hidden" readonly="readonly" class="resultResultado" value="<%=resultado.processo.id%>">
+                    <input type="hidden" readonly="readonly" class="descricaoResultado" value="<%=resultado.descricao%>">        
+            <%end%>
+            
+        </table>
+    </div> 
+</div>
+
+<script>
+     var formulario = document.getElementsByClassName('formulario');
+        for (var i = 0; i< formulario.length; i++){
+          formulario[i].addEventListener('keydown', e => {
+                if(e.key == "Enter") {
+                    e.target.parentElement.parentElement.submit();
+                }
+            })
+        }
+      
+    function addEventListenerToForm() {
+    
+    var formulario = document.getElementsByClassName('formulario');
+    for (var i = 0; i< formulario.length; i++){
+        formulario[i].addEventListener('keydown', e => {
+            if(e.key == "Enter") {
+                console.log(e.target.parentElement);
+                e.target.parentElement.parentElement.submit();
+            }
+        })
+    }
+    }
+
+    var selectprocesso = document.getElementsByClassName("processo");
+    var inputprocesso = document.getElementsByClassName('inputElProcesso');
+    var compararesultado = document.getElementsByClassName('resultResultado');
+    var descricaoResultado = document.getElementsByClassName('descricaoResultado');
+
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody');
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+
+    document.getElementById('body').appendChild(table);
+    i = 0;
+    while( i < selectprocesso.length) {
+        
+        selectprocesso[i].addEventListener('change', e => {
+            e.target.nextElementSibling.value = e.target.value;
+            tbody.innerText = "";
+            
+            for(var j = 0 ; j < compararesultado.length; j++)
+            {
+                if(compararesultado[j].attributes[3].nodeValue == e.target.value)
+                {
+                    let row = document.createElement('tr');
+                    let heading = document.createElement('th');
+                    heading.innerHTML = descricaoResultado[j].attributes[3].nodeValue;
+                    row.appendChild(heading);
+                    tbody.appendChild(row);
+                }
+
+            }
+        })         
+        i++;
+    }
+    
+</script>
+
+</body>
+</html>

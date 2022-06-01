@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+html, body {
+  height: 100%;
+  width: 100%;
+}
+.flex-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.div_cabecalho {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    border-style: solid;
+    border-width: 3px;
+    flex-direction: row;
+}
+.div_cabecalho_1 {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: row;
+}
+.div_cabecalho_2 {
+    display: flex;
+    width: 50%;
+    height: 100%;
+    flex-direction: row;
+}
+.div_corpo {
+    display: flex;
+    width: 100%;
+    height: 90%;
+    border-style: solid;
+    border-width: 3px;
+    flex-direction: column;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+th, td{
+    padding: 10px 20px;
+    border: 1px solid #000;
+}
+</style>
+</head>
+<body>
+    
+<div class="flex-container">
+   <div class="div_cabecalho">
+        <div class="div_cabecalho_1">
+            <h1>Cadastrar Processo</h1>
+        </div>   
+
+        <div class="div_cabecalho_1">
+            
+            <form action="/cadastroProcesso/incluir_processo" method="post" class="formulario">
+            <div>
+                
+                <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensão", class: "dimensao" %>
+                
+                <input type="hidden" name="dimensao_id" readonly="readonly" id="inputElDimensao" class="inputElDimensao">
+                <input type="text" name="descricao" placeholder="Digite o processo">  
+                
+                <a href="/cadastro">Voltar para Dimensao</a>
+                <a href="/cadastroResultado/">Ir para Resultado Esperado</a>
+            </div>           
+            </form>
+                                
+        </div> 
+   </div> 
+
+   <div class="div_corpo">
+        <table id="body">
+            
+            <% @processos.each do |processo| %>                
+                    <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
+                    <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">        
+            <%end%>
+            
+        </table>
+    </div> 
+</div>
+
+<script>
+     var formulario = document.getElementsByClassName('formulario');
+        for (var i = 0; i< formulario.length; i++){
+          formulario[i].addEventListener('keydown', e => {
+                if(e.key == "Enter") {
+                    e.target.parentElement.parentElement.submit();
+                }
+            })
+        }
+      
+    function addEventListenerToForm() {
+    
+    var formulario = document.getElementsByClassName('formulario');
+    for (var i = 0; i< formulario.length; i++){
+        formulario[i].addEventListener('keydown', e => {
+            if(e.key == "Enter") {
+                console.log(e.target.parentElement);
+                e.target.parentElement.parentElement.submit();
+            }
+        })
+    }
+    }
+
+    var selectdimensao = document.getElementsByClassName("dimensao");
+    var inputdimensao = document.getElementsByClassName('inputElDimensao');
+    var comparaprocesso = document.getElementsByClassName('resultProcesso');
+    var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
+
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody');
+
+    table.appendChild(thead);
+    table.appendChild(tbody);
+
+    document.getElementById('body').appendChild(table);
+    i = 0;
+    while( i < selectdimensao.length) {
+        
+        selectdimensao[i].addEventListener('change', e => {
+            e.target.nextElementSibling.value = e.target.value;
+            tbody.innerText = "";
+            
+            for(var j = 0 ; j < comparaprocesso.length; j++)
+            {
+                if(comparaprocesso[j].attributes[3].nodeValue == e.target.value)
+                {
+                    let row = document.createElement('tr');
+                    let heading = document.createElement('th');
+                    heading.innerHTML = descricaoProcesso[j].attributes[3].nodeValue;
+                    row.appendChild(heading);
+                    tbody.appendChild(row);
+                }
+
+            }
+        })         
+        i++;
+    }
+    
+    
+
+    
+
+
+
+</script>
+
+</body>
+</html>

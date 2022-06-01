@@ -1,2 +1,4 @@
 class Insumo < ApplicationRecord
 end
+
+

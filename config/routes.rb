@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   root to: 'main_screen#index'
   get "/main_screen", to: "main_screen#index"
+  get "/cadastro", to: "cadastro#index"
+  get "/cadastroProcesso", to: "cadastro#indexProcesso"
+  get "/cadastroResultado", to: "cadastro#indexResultado"
+
+
+  ##Rotas da tela principal
 
   #Fornecedores
  
@@ -71,5 +77,28 @@ Rails.application.routes.draw do
   post "/main_screen/alterar_controle", to: "main_screen#alterar_controle"
   post "/main_screen/:id/salvar_controle", to: "main_screen#salvar_controle"
   get "/main_screen/:id/excluir_controle", to: "main_screen#excluir_controle"
+
+  ##Rotas do cadastro
+
+  #dimensaos
+
+  post "/cadastro/incluir_dimensao", to: "cadastro#incluir_dimensao"
+  post "/cadastro/alterar_dimensao", to: "cadastro#alterar_dimensao"
+  post "/cadastro/:id/salvar_dimensao", to: "cadastro#salvar_dimensao"
+  get "/cadastro/:id/excluir_dimensao", to: "cadastro#excluir_dimensao"
+
+  #processos
+  
+  post "/cadastroProcesso/incluir_processo", to: "cadastro#incluir_processo"
+  post "/cadastroProcesso/alterar_processo", to: "cadastro#alterar_processo"
+  post "/cadastroProcesso/:id/salvar_processo", to: "cadastro#salvar_processo"
+  get "/cadastroProcesso/:id/excluir_processo", to: "cadastro#excluir_processo"
+
+  #resultados
+  
+  post "/cadastroResultado/incluir_resultado", to: "cadastro#incluir_resultado"
+  post "/cadastroResultado/alterar_resultado", to: "cadastro#alterar_resultado"
+  post "/cadastroResultado/:id/salvar_resultado", to: "cadastro#salvar_resultado"
+  get "/cadastroResultado/:id/excluir_resultado", to: "cadastro#excluir_resultado"
 
 end
