@@ -6,88 +6,192 @@ html, body {
   height: 100%;
   width: 100%;
 }
-.flex-container {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-}
-.div_cabecalho {
-    display: flex;
-    width: 100%;
-    height: 10%;
-    border-style: solid;
-    border-width: 3px;
-    flex-direction: row;
-}
-.div_cabecalho_1 {
-    display: flex;
-    width: 50%;
+.tela{
     height: 100%;
-    flex-direction: row;
-}
-.div_cabecalho_2 {
-    display: flex;
-    width: 50%;
-    height: 100%;
-    flex-direction: row;
-}
-.div_corpo {
-    display: flex;
     width: 100%;
-    height: 90%;
-    border-style: solid;
-    border-width: 3px;
+    display: flex;
     flex-direction: column;
 }
-
-table{
-    border-collapse: collapse;
-    border-spacing: 0;
+.cabecalho{
+    background: #7749F8;
+    border-radius: 4px;
+    height: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.cabecalho_1{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+    align-items: center;
+    justify-content: center;   
+}
+.cabecalho_2{
+    display: flex;
+    height: 100%;
+    width: 33.4%;
+    align-items: center;
+    justify-content: center;  
+}
+.cabecalho_3{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+    align-items: center;
+    justify-content: center;  
+}
+.titulos{
+    display: flex;
+    height: 9%;
+    width: 100%;
+    align-items: center;
+    justify-content: center; 
+}
+.corpo{
+    height: 86%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+} 
+.corpo_1{
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    width: 30%;
+    justify-content: space-around;
+}
+.corpo_2{
+    display: flex;
+    height: 100%;
+    width: 70%;
+    align-items: center;
+    justify-content: center; 
+    flex-direction: row;
+}
+.corpo_2_1{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+    flex-direction: column;
+}
+.corpo_2_2{
+    display: flex;
+    height: 100%;
+    width: 33.4%;
+}
+.corpo_2_3{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+}
+A{
+    text-decoration: none;
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 16px;
+}
+.corpo_label
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #152536;
+}
+.corpo_texto_select{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    color: #6C757D;
+    width: 51.8%;
+}
+.corpo_texto_input{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    color: #6C757D;
+    width: 50%;
 }
 th, td{
     padding: 10px 20px;
     border: 1px solid #000;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    color: #152536;
+}
+.form_flex{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 100%;
 }
 </style>
 </head>
 <body>
     
-<div class="flex-container">
-   <div class="div_cabecalho">
-        <div class="div_cabecalho_1">
-            <h1>Cadastrar Processo</h1>
-        </div>   
+<div class="tela">
+    <div class="cabecalho">
+        <div class="cabecalho_1">
+            <a href="/cadastro">Dimensão</a>
+        </div>
+        <div class="cabecalho_2">
+            <a href="/cadastroProcesso">Processo</a>
+        </div>
+        <div class="cabecalho_3">
+            <a href="/cadastroResultado">Resultados Esperados</a>
+        </div>
+    </div>
+    <div class="titulos">
+        <h1>Gerencia de Projetos - PMMC</h1>
+    </div>
+    <div class="corpo">
+        <div class="corpo_1">
+            <form action="/cadastroProcesso/incluir_processo" method="post" class="formulario form_flex">
 
-        <div class="div_cabecalho_1">
+                <label class="corpo_label">Selecione a Dimensão</label>
+                <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensão", class: "dimensao corpo_texto_select" %>
+                <label class="corpo_label">Cadastre o Processo</label>
+                <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao">
             
-            <form action="/cadastroProcesso/incluir_processo" method="post" class="formulario">
-            <div>
-                
-                <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensão", class: "dimensao" %>
-                
-                <input type="hidden" name="dimensao_id" readonly="readonly" id="inputElDimensao" class="inputElDimensao">
-                <input type="text" name="descricao" placeholder="Digite o processo">  
-                
-                <a href="/cadastro">Voltar para Dimensao</a>
-                <a href="/cadastroResultado/">Ir para Resultado Esperado</a>
-            </div>           
             </form>
-                                
-        </div> 
-   </div> 
+            
+        </div>
+        <div class="corpo_2">
+            <div class="corpo_2_1">
+            
+               
+            </div>
+            <div class="corpo_2_2">
+                <table id="body">
+        
+                    <% @processos.each do |processo| %>                
+                        <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
+                        <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">        
+                    <%end%>
+                
+                </table>
+            </div>
 
-   <div class="div_corpo">
-        <table id="body">
+            <div class="corpo_2_3">
             
-            <% @processos.each do |processo| %>                
-                    <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
-                    <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">        
-            <%end%>
-            
-        </table>
-    </div> 
+            </div>
+          
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -113,9 +217,9 @@ th, td{
     }
     }
 
-    var selectdimensao = document.getElementsByClassName("dimensao");
-    var inputdimensao = document.getElementsByClassName('inputElDimensao');
-    var comparaprocesso = document.getElementsByClassName('resultProcesso');
+    var selectDimensao = document.getElementsByClassName("dimensao");
+    var inputDimensao = document.getElementsByClassName('inputElDimensao');
+    var comparaProcesso = document.getElementsByClassName('resultProcesso');
     var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
 
     let table = document.createElement('table');
@@ -127,15 +231,15 @@ th, td{
 
     document.getElementById('body').appendChild(table);
     i = 0;
-    while( i < selectdimensao.length) {
+    while( i < selectDimensao.length) {
         
-        selectdimensao[i].addEventListener('change', e => {
+        selectDimensao[i].addEventListener('change', e => {
             e.target.nextElementSibling.value = e.target.value;
             tbody.innerText = "";
             
-            for(var j = 0 ; j < comparaprocesso.length; j++)
+            for(var j = 0 ; j < comparaProcesso.length; j++)
             {
-                if(comparaprocesso[j].attributes[3].nodeValue == e.target.value)
+                if(comparaProcesso[j].attributes[3].nodeValue == e.target.value)
                 {
                     let row = document.createElement('tr');
                     let heading = document.createElement('th');
@@ -149,12 +253,6 @@ th, td{
         i++;
     }
     
-    
-
-    
-
-
-
 </script>
 
 </body>
