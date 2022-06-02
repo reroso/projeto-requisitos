@@ -5,6 +5,7 @@
 html, body {
   height: 100%;
   width: 100%;
+  background: #F5F5F5;
 }
 .tela{
     height: 100%;
@@ -74,16 +75,25 @@ html, body {
     height: 100%;
     width: 33.3%;
     flex-direction: column;
+    text-align: center;
+
 }
 .corpo_2_2{
     display: flex;
     height: 100%;
     width: 33.4%;
+    flex-direction: column;
+    text-align: center;
+
 }
 .corpo_2_3{
     display: flex;
     height: 100%;
     width: 33.3%;
+    flex-direction: column;
+    align-items: baseline;
+    text-align: center;
+
 }
 A{
     text-decoration: none;
@@ -121,7 +131,7 @@ A{
     color: #6C757D;
     width: 50%;
 }
-th, td{
+tr{
     padding: 10px 20px;
     border: 1px solid #000;
     font-family: 'Inter';
@@ -131,6 +141,19 @@ th, td{
     line-height: 28px;
     text-align: center;
     color: #152536;
+}
+td{
+    padding: 10px 20px;
+    border: 1px solid #000;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    color: #152536;
+    width: 400px;
+
 }
 .form_flex{
     display: flex;
@@ -171,15 +194,21 @@ th, td{
         </div>
         <div class="corpo_2">
             <div class="corpo_2_1">
-            
+                <label class="corpo_label">Dimensões</label>
+                <table id="body">
+                
+                </table>
                
             </div>
             <div class="corpo_2_2">
-                <table id="body">
+                <label class="corpo_label">Processos</label>
+                <table id="body2">
         
                     <% @processos.each do |processo| %>                
                         <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
-                        <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">        
+                        <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">
+                        <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=processo.dimensao.descricao%>">        
+        
                     <%end%>
                 
                 </table>
@@ -221,38 +250,53 @@ th, td{
     var inputDimensao = document.getElementsByClassName('inputElDimensao');
     var comparaProcesso = document.getElementsByClassName('resultProcesso');
     var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
+    var descricaoDimensao = document.getElementsByClassName('descricaoDimensao');
 
     let table = document.createElement('table');
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
+    
+    let table2 = document.createElement('table');
+    let thead2 = document.createElement('thead');
+    let tbody2 = document.createElement('tbody');
 
     table.appendChild(thead);
     table.appendChild(tbody);
 
+    table2.appendChild(thead2);
+    table2.appendChild(tbody2);
+
     document.getElementById('body').appendChild(table);
+    document.getElementById('body2').appendChild(table2);
     i = 0;
     while( i < selectDimensao.length) {
         
         selectDimensao[i].addEventListener('change', e => {
             e.target.nextElementSibling.value = e.target.value;
             tbody.innerText = "";
+            tbody2.innerText = "";
             
             for(var j = 0 ; j < comparaProcesso.length; j++)
             {
                 if(comparaProcesso[j].attributes[3].nodeValue == e.target.value)
                 {
                     let row = document.createElement('tr');
-                    let heading = document.createElement('th');
-                    heading.innerHTML = descricaoProcesso[j].attributes[3].nodeValue;
+                    let heading = document.createElement('td');
+                    heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody.appendChild(row);
+
+                    row = document.createElement('tr');
+                    heading = document.createElement('td');
+                    heading.innerHTML = descricaoProcesso[j].attributes[3].nodeValue;
+                    row.appendChild(heading);
+                    tbody2.appendChild(row);
                 }
 
             }
         })         
         i++;
     }
-    
 </script>
 
 </body>

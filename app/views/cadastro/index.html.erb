@@ -5,6 +5,7 @@
 html, body {
   height: 100%;
   width: 100%;
+  background: #F5F5F5;
 }
 .tela{
     height: 100%;
@@ -74,6 +75,7 @@ html, body {
     height: 100%;
     width: 33.3%;
     flex-direction: column;
+    text-align: center;
 }
 .corpo_2_2{
     display: flex;
@@ -151,8 +153,9 @@ th, td{
             
         </div>
         <div class="corpo_2">
+                
             <div class="corpo_2_1">
-            
+                <label class="corpo_label">Dimensões</label>
                 <table>
         
                 <% @dimensaos.each do |dimensao| %>

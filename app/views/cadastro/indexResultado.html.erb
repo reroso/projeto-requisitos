@@ -5,89 +5,224 @@
 html, body {
   height: 100%;
   width: 100%;
+  background: #F5F5F5;
 }
-.flex-container {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-}
-.div_cabecalho {
-    display: flex;
-    width: 100%;
-    height: 10%;
-    border-style: solid;
-    border-width: 3px;
-    flex-direction: row;
-}
-.div_cabecalho_1 {
-    display: flex;
-    width: 50%;
+.tela{
     height: 100%;
-    flex-direction: row;
-}
-.div_cabecalho_2 {
-    display: flex;
-    width: 50%;
-    height: 100%;
-    flex-direction: row;
-}
-.div_corpo {
-    display: flex;
     width: 100%;
-    height: 90%;
-    border-style: solid;
-    border-width: 3px;
+    display: flex;
     flex-direction: column;
 }
-
-table{
-    border-collapse: collapse;
-    border-spacing: 0;
+.cabecalho{
+    background: #7749F8;
+    border-radius: 4px;
+    height: 5%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
-th, td{
+.cabecalho_1{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+    align-items: center;
+    justify-content: center;   
+}
+.cabecalho_2{
+    display: flex;
+    height: 100%;
+    width: 33.4%;
+    align-items: center;
+    justify-content: center;  
+}
+.cabecalho_3{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+    align-items: center;
+    justify-content: center;  
+}
+.titulos{
+    display: flex;
+    height: 9%;
+    width: 100%;
+    align-items: center;
+    justify-content: center; 
+}
+.corpo{
+    height: 86%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+} 
+.corpo_1{
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    width: 30%;
+    justify-content: space-around;
+}
+.corpo_2{
+    display: flex;
+    height: 100%;
+    width: 70%;
+    align-items: center;
+    justify-content: center; 
+    flex-direction: row;
+}
+.corpo_2_1{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+    flex-direction: column;
+    text-align: center;
+
+}
+.corpo_2_2{
+    display: flex;
+    height: 100%;
+    width: 33.4%;
+    flex-direction: column;
+    text-align: center;
+
+}
+.corpo_2_3{
+    display: flex;
+    height: 100%;
+    width: 33.3%;
+    flex-direction: column;
+    text-align: center;
+
+}
+A{
+    text-decoration: none;
+    color: white;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 16px;
+}
+.corpo_label
+{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #152536;
+}
+.corpo_texto_select{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    color: #6C757D;
+    width: 51.8%;
+}
+.corpo_texto_input{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 21px;
+    color: #6C757D;
+    width: 50%;
+}
+tr{
     padding: 10px 20px;
     border: 1px solid #000;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    color: #152536;
+}
+td{
+    padding: 10px 20px;
+    border: 1px solid #000;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    text-align: center;
+    color: #152536;
+    width: 400px;
+
+}
+.form_flex{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 100%;
 }
 </style>
 </head>
 <body>
     
-<div class="flex-container">
-   <div class="div_cabecalho">
-        <div class="div_cabecalho_1">
-            <h1>Cadastrar Resultado</h1>
-        </div>   
+<div class="tela">
+    <div class="cabecalho">
+        <div class="cabecalho_1">
+            <a href="/cadastro">Dimensão</a>
+        </div>
+        <div class="cabecalho_2">
+            <a href="/cadastroProcesso">Processo</a>
+        </div>
+        <div class="cabecalho_3">
+            <a href="/cadastroResultado">Resultados Esperados</a>
+        </div>
+    </div>
+    <div class="titulos">
+        <h1>Gerencia de Projetos - PMMC</h1>
+    </div>
+    <div class="corpo">
+        <div class="corpo_1">
+            <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario form_flex">
 
-        <div class="div_cabecalho_1">
+                <label class="corpo_label">Selecione o Processo</label>
+                <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select" %>
+                <label class="corpo_label">Cadastre o Resultado</label>
+                <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao">
             
-            <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario">
-            <div>
-                
-                <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo" %>
-                
-                <input type="text" name="processo_id" readonly="readonly" id="inputElProcesso" class="inputElProcesso">
-                <input type="text" name="descricao" placeholder="Digite o resultado">  
-                <a href="/cadastro/">Voltar para Dimensao</a>
-                <a href="/cadastroProcesso/">Voltar para Processo</a>
-                 
-            </div>           
             </form>
-                                
-        </div> 
-   </div> 
+            
+        </div>
+        <div class="corpo_2">
+            <div class="corpo_2_1">
+                <label class="corpo_label">Dimensões</label>
+                <table id="body">
+                
+                </table>
+               
+            </div>
+            <div class="corpo_2_2">
+                <label class="corpo_label">Processos</label>
+                <table id="body2">
+        
+                    <% @resultados.each do |resultado| %>                
+                        <input type="hidden" readonly="readonly" class="resultResultado" value="<%=resultado.processo.id%>">
+                        <input type="hidden" readonly="readonly" class="descricaoResultado" value="<%=resultado.descricao%>">        
+                        <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=resultado.processo.descricao%>">        
+                        <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=resultado.processo.dimensao.descricao%>">        
+                    <%end%>
+                
+                </table>
+            </div>
 
-   <div class="div_corpo">
-        <table id="body">
-            
-            <% @resultados.each do |resultado| %>                
-                    <input type="hidden" readonly="readonly" class="resultResultado" value="<%=resultado.processo.id%>">
-                    <input type="hidden" readonly="readonly" class="descricaoResultado" value="<%=resultado.descricao%>">        
-            <%end%>
-            
-        </table>
-    </div> 
+            <div class="corpo_2_3">
+                <label class="corpo_label">Resultados Esperados</label>
+                <table id="body3">
+                
+                </table>
+            </div>
+          
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -117,15 +252,36 @@ th, td{
     var inputprocesso = document.getElementsByClassName('inputElProcesso');
     var compararesultado = document.getElementsByClassName('resultResultado');
     var descricaoResultado = document.getElementsByClassName('descricaoResultado');
+    var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
+    var descricaoDimensao = document.getElementsByClassName('descricaoDimensao');
+
+    
 
     let table = document.createElement('table');
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
+    
+    let table2 = document.createElement('table');
+    let thead2 = document.createElement('thead');
+    let tbody2 = document.createElement('tbody');
+
+    let table3 = document.createElement('table');
+    let thead3 = document.createElement('thead');
+    let tbody3 = document.createElement('tbody');
 
     table.appendChild(thead);
     table.appendChild(tbody);
 
+    table2.appendChild(thead2);
+    table2.appendChild(tbody2);
+
+    table3.appendChild(thead3);
+    table3.appendChild(tbody3);
+
     document.getElementById('body').appendChild(table);
+    document.getElementById('body2').appendChild(table2);
+    document.getElementById('body3').appendChild(table3);
+
     i = 0;
     while( i < selectprocesso.length) {
         
@@ -138,16 +294,29 @@ th, td{
                 if(compararesultado[j].attributes[3].nodeValue == e.target.value)
                 {
                     let row = document.createElement('tr');
-                    let heading = document.createElement('th');
-                    heading.innerHTML = descricaoResultado[j].attributes[3].nodeValue;
+                    let heading = document.createElement('td');
+                    heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody.appendChild(row);
+
+                    row = document.createElement('tr');
+                    heading = document.createElement('td');
+                    heading.innerHTML = descricaoProcesso[j].attributes[3].nodeValue;
+                    row.appendChild(heading);
+                    tbody2.appendChild(row);
+
+                    row = document.createElement('tr');
+                    heading = document.createElement('td');
+                    heading.innerHTML = descricaoResultado[j].attributes[3].nodeValue;
+                    row.appendChild(heading);
+                    tbody3.appendChild(row);
                 }
 
             }
         })         
         i++;
     }
+    
     
 </script>
 
