@@ -1,0 +1,2 @@
+class Maturidade < ApplicationRecord
+end

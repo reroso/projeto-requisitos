@@ -191,11 +191,11 @@ td{
     </div>
     <div class="corpo">
         <div class="corpo_1">
-            <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario form_flex">
+            <form action="/cadastroMaturidade/incluir_maturidade" method="post" class="formulario form_flex">
 
-                <label class="corpo_label">Selecione o Processo</label>
-                <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select" %>
-                <label class="corpo_label">Cadastre o Resultado</label>
+                <label class="corpo_label">Selecione a posição do nivel</label>
+                <%= select_tag(:posicao, options_for_select([['1', 1], ['2', 2],['3', 3], ['4', 4],['5', 5], ['6', 6],['7', 7], ['8', 8],['9', 9], ['10', 10], ]), prompt: "Escolha um nivel", class: "maturidade corpo_texto_select") %>
+                <label class="corpo_label">Cadastre o nivel de maturidade</label>
                 <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao">
             
             </form>
@@ -203,28 +203,26 @@ td{
         </div>
         <div class="corpo_2">
             <div class="corpo_2_1">
-                <label class="corpo_label">Dimensões</label>
+                <label class="corpo_label">Descrição</label>
                 <table id="body">
                 
                 </table>
                
             </div>
             <div class="corpo_2_2">
-                <label class="corpo_label">Processos</label>
+                <label class="corpo_label">Posição</label>
                 <table id="body2">
         
-                    <% @resultados.each do |resultado| %>                
-                        <input type="hidden" readonly="readonly" class="resultResultado" value="<%=resultado.processo.id%>">
-                        <input type="hidden" readonly="readonly" class="descricaoResultado" value="<%=resultado.descricao%>">        
-                        <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=resultado.processo.descricao%>">        
-                        <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=resultado.processo.dimensao.descricao%>">        
+                    <% @maturidades.each do |maturidade| %>                
+                        <input type="hidden" readonly="readonly" class="resultMaturidade" value="<%=maturidade.posicao%>">
+                        <input type="hidden" readonly="readonly" class="descricaoMaturidade" value="<%=maturidade.descricao%>">        
+                        <input type="hidden" readonly="readonly" class="descricaoPosicao" value="<%=maturidade.posicao%>">        
                     <%end%>
                 
                 </table>
             </div>
 
             <div class="corpo_2_3">
-                <label class="corpo_label">Resultados Esperados</label>
                 <table id="body3">
                 
                 </table>
@@ -258,14 +256,10 @@ td{
     }
     }
 
-    var selectprocesso = document.getElementsByClassName("processo");
-    var inputprocesso = document.getElementsByClassName('inputElProcesso');
-    var compararesultado = document.getElementsByClassName('resultResultado');
-    var descricaoResultado = document.getElementsByClassName('descricaoResultado');
-    var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
-    var descricaoDimensao = document.getElementsByClassName('descricaoDimensao');
-
-    
+    var selectMaturidade = document.getElementsByClassName("maturidade");
+    var comparaMaturidade = document.getElementsByClassName('resultMaturidade');
+    var descricaoMaturidade = document.getElementsByClassName('descricaoMaturidade');
+    var descricaoPosicao = document.getElementsByClassName('descricaoPosicao');
 
     let table = document.createElement('table');
     let thead = document.createElement('thead');
@@ -275,58 +269,44 @@ td{
     let thead2 = document.createElement('thead');
     let tbody2 = document.createElement('tbody');
 
-    let table3 = document.createElement('table');
-    let thead3 = document.createElement('thead');
-    let tbody3 = document.createElement('tbody');
-
     table.appendChild(thead);
     table.appendChild(tbody);
 
     table2.appendChild(thead2);
     table2.appendChild(tbody2);
 
-    table3.appendChild(thead3);
-    table3.appendChild(tbody3);
-
     document.getElementById('body').appendChild(table);
     document.getElementById('body2').appendChild(table2);
-    document.getElementById('body3').appendChild(table3);
 
     i = 0;
-    while( i < selectprocesso.length) {
+    while( i <= selectMaturidade.length) {
         
-        selectprocesso[i].addEventListener('change', e => {
+        selectMaturidade[i].addEventListener('change', e => {
             e.target.nextElementSibling.value = e.target.value;
             tbody.innerText = "";
-            
-            for(var j = 0 ; j < compararesultado.length; j++)
+            tbody2.innerText = "";
+
+            for(var j = 0 ; j < comparaMaturidade.length; j++)
             {
-                if(compararesultado[j].attributes[3].nodeValue == e.target.value)
+                if(comparaMaturidade[j].attributes[3].nodeValue == e.target.value)
                 {
                     let row = document.createElement('tr');
                     let heading = document.createElement('td');
-                    heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
+                    heading.innerHTML = descricaoMaturidade[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody.appendChild(row);
 
                     row = document.createElement('tr');
                     heading = document.createElement('td');
-                    heading.innerHTML = descricaoProcesso[j].attributes[3].nodeValue;
+                    heading.innerHTML = descricaoPosicao[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody2.appendChild(row);
-
-                    row = document.createElement('tr');
-                    heading = document.createElement('td');
-                    heading.innerHTML = descricaoResultado[j].attributes[3].nodeValue;
-                    row.appendChild(heading);
-                    tbody3.appendChild(row);
                 }
 
             }
         })         
         i++;
     }
-    
     
 </script>
 

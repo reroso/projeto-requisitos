@@ -17,6 +17,10 @@ class CadastroController < ApplicationController
       @resultados = Resultado.all
     end
 
+    def indexMaturidade
+      @maturidades = Maturidade.all
+    end
+
     #dimensao
 
     def incluir_dimensao
@@ -107,5 +111,36 @@ class CadastroController < ApplicationController
       resultado = Resultado.new
       resultado.descricao = params[:descricao]
       resultado.save
+    end
+
+    #maturidades
+
+    def incluir_maturidade
+      maturidade = Maturidade.new
+      maturidade.descricao = params[:descricao]
+      maturidade.posicao = params[:posicao]
+      maturidade.save
+      
+      redirect_to "/cadastroMaturidade"
+    end
+
+    def salvar_maturidade
+      maturidade = Maturidade.find(params[:id])
+      maturidade.descricao = params[:descricao]
+      maturidade.save
+
+      redirect_to "/cadastroMaturidade"
+    end
+
+    def excluir_maturidade
+      maturidade = Maturidade.find(params[:id])
+      maturidade.destroy
+      redirect_to "/cadastroMaturidade"
+    end
+
+    def alterar_maturidade
+      maturidade = Maturidade.new
+      maturidade.descricao = params[:descricao]
+      maturidade.save
     end
 end

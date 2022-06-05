@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get "/cadastro", to: "cadastro#index"
   get "/cadastroProcesso", to: "cadastro#indexProcesso"
   get "/cadastroResultado", to: "cadastro#indexResultado"
+  get "/cadastroMaturidade", to: "cadastro#indexMaturidade"
+
 
 
   ##Rotas da tela principal
@@ -100,5 +102,14 @@ Rails.application.routes.draw do
   post "/cadastroResultado/alterar_resultado", to: "cadastro#alterar_resultado"
   post "/cadastroResultado/:id/salvar_resultado", to: "cadastro#salvar_resultado"
   get "/cadastroResultado/:id/excluir_resultado", to: "cadastro#excluir_resultado"
+
+  
+  #maturidades
+    
+  post "/cadastroMaturidade/incluir_maturidade", to: "cadastro#incluir_maturidade"
+  post "/cadastroMaturidade/alterar_maturidade", to: "cadastro#alterar_maturidade"
+  post "/cadastroMaturidade/:id/salvar_maturidade", to: "cadastro#salvar_maturidade"
+  get "/cadastroMaturidade/:id/excluir_maturidade", to: "cadastro#excluir_maturidade"
+  
 
 end
