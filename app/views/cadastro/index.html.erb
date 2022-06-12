@@ -84,6 +84,21 @@ html, body {
     flex-direction: column;
     text-align: center;
 }
+.corpo_2_1_1{
+    display: flex;
+    height: 5%;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-evenly;
+}
+.corpo_2_1_2{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+}
 .corpo_2_2{
     display: flex;
     height: 100%;
@@ -128,8 +143,20 @@ th, td{
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
+    text-align: left;
     color: #152536;
+}
+.hidden{
+    display: none;
+}
+.botao_adicionar{
+    background-color: #7749F8;
+    color: white;
+    display: inline-block;
+    font-size: 20px;
+    border: 1px;
+    height: fit-content;
+
 }
 
 </style>
@@ -156,25 +183,30 @@ th, td{
     </div>
     <div class="corpo">
         <div class="corpo_1">
-            <label class="corpo_label">Cadastre o Processo</label>
+            <label class="corpo_label hidden" id="label_invisivel">Cadastre a Dimensão</label>
             <form action="/cadastro/incluir_dimensao" method="post" class="formulario">
-                <input class="corpo_textos" placeholder="Digite aqui" type="text" name="descricao">
+                <input class="corpo_textos hidden" placeholder="Digite aqui" id ="input_invisivel" type="text" name="descricao">
             </form>
             
         </div>
         <div class="corpo_2">
                 
             <div class="corpo_2_1">
-                <label class="corpo_label">Dimensões</label>
-                <table>
-        
-                <% @dimensaos.each do |dimensao| %>
-                    <tr>
-                        <th><%= dimensao.descricao %></th>
-                    </tr>
-                <%end%>
-                
-                </table>
+                <div class="corpo_2_1_1">
+                    <label class="corpo_label">Dimensões</label>
+                    <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+                </div>
+                <div class="corpo_2_1_2">
+                    <table>
+            
+                    <% @dimensaos.each do |dimensao| %>
+                        <tr>
+                            <th><%= dimensao.descricao %></th>
+                        </tr>
+                    <%end%>
+                    
+                    </table>
+                </div>
             </div>
             <div class="corpo_2_2">
             
@@ -190,7 +222,7 @@ th, td{
 </div>
 
 <script>
-     var formulario = document.getElementsByClassName('formulario');
+    var formulario = document.getElementsByClassName('formulario');
         for (var i = 0; i< formulario.length; i++){
           formulario[i].addEventListener('keydown', e => {
                 if(e.key == "Enter") {
@@ -210,6 +242,14 @@ th, td{
             }
         })
     }
+    }
+
+    var inputInvisivel = document.getElementById("input_invisivel");
+    var labelInvisivel = document.getElementById("label_invisivel");
+
+    function funcao(){
+        inputInvisivel.classList.remove('hidden');
+        labelInvisivel.classList.remove('hidden');
     }
 </script>
 

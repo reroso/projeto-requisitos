@@ -104,7 +104,7 @@ html, body {
 }
 A{
     text-decoration: none;
-    color: white;
+    color: black;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
@@ -146,8 +146,10 @@ tr{
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
+    text-align: left;
     color: #152536;
+    justify-content: space-evenly;
+
 }
 td{
     padding: 10px 20px;
@@ -157,9 +159,11 @@ td{
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
+    text-align: left;
     color: #152536;
     width: 400px;
+    justify-content: space-evenly;
+
 
 }
 .form_flex{
@@ -217,7 +221,9 @@ td{
                     <% @processos.each do |processo| %>                
                         <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
                         <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">
-                        <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=processo.dimensao.descricao%>">        
+                        <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=processo.dimensao.descricao%>">
+                        <input type="hidden" readonly="readonly" class="idProcesso" value="<%=processo.id%>">
+   
         
                     <%end%>
                 
@@ -234,7 +240,7 @@ td{
 </div>
 
 <script>
-     var formulario = document.getElementsByClassName('formulario');
+    var formulario = document.getElementsByClassName('formulario');
         for (var i = 0; i< formulario.length; i++){
           formulario[i].addEventListener('keydown', e => {
                 if(e.key == "Enter") {
@@ -261,14 +267,17 @@ td{
     var comparaProcesso = document.getElementsByClassName('resultProcesso');
     var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
     var descricaoDimensao = document.getElementsByClassName('descricaoDimensao');
-
-    let table = document.createElement('table');
-    let thead = document.createElement('thead');
-    let tbody = document.createElement('tbody');
+    var idProcesso = document.getElementsByClassName('idProcesso')
+    var formProcesso = document.getElementById('formProcesso');
     
-    let table2 = document.createElement('table');
-    let thead2 = document.createElement('thead');
-    let tbody2 = document.createElement('tbody');
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tbody = document.createElement('tbody');
+    
+    var table2 = document.createElement('table');
+    var thead2 = document.createElement('thead');
+    var tbody2 = document.createElement('tbody');
+    
 
     table.appendChild(thead);
     table.appendChild(tbody);
@@ -290,17 +299,24 @@ td{
             {
                 if(comparaProcesso[j].attributes[3].nodeValue == e.target.value)
                 {
-                    let row = document.createElement('tr');
-                    let heading = document.createElement('td');
+                    
+                    var k = idProcesso[j].attributes[3].nodeValue
+                    var row = document.createElement('tr');
+                    var heading = document.createElement('td');
                     heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody.appendChild(row);
 
                     row = document.createElement('tr');
                     heading = document.createElement('td');
-                    heading.innerHTML = descricaoProcesso[j].attributes[3].nodeValue;
+                    heading2 = document.createElement('td'); 
+                    //formProcesso[0].defaultValue = descricaoProcesso[j].attributes[3].nodeValue;                        
+                    heading.innerHTML = `<fieldset><form action="/cadastroProcesso/${k}/salvar_processo" method="post" class="formulario"><textarea type="text" name="descricao" style="background-color:transparent; border: none;">${descricaoProcesso[j].attributes[3].nodeValue}</textarea></form></fieldset>`;
+                    heading2.innerHTML = `<a href=/cadastroProcesso/${k}/excluir_processo>X<a>`;
                     row.appendChild(heading);
+                    row.appendChild(heading2);
                     tbody2.appendChild(row);
+
                 }
 
             }

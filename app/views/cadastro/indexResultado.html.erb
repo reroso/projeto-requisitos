@@ -145,7 +145,7 @@ tr{
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
+    text-align: left;
     color: #152536;
 }
 td{
@@ -156,7 +156,7 @@ td{
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
+    text-align: left;
     color: #152536;
     width: 400px;
 
@@ -236,7 +236,7 @@ td{
 </div>
 
 <script>
-     var formulario = document.getElementsByClassName('formulario');
+    var formulario = document.getElementsByClassName('formulario');
         for (var i = 0; i< formulario.length; i++){
           formulario[i].addEventListener('keydown', e => {
                 if(e.key == "Enter") {
@@ -267,17 +267,17 @@ td{
 
     
 
-    let table = document.createElement('table');
-    let thead = document.createElement('thead');
-    let tbody = document.createElement('tbody');
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tbody = document.createElement('tbody');
     
-    let table2 = document.createElement('table');
-    let thead2 = document.createElement('thead');
-    let tbody2 = document.createElement('tbody');
+    var table2 = document.createElement('table');
+    var thead2 = document.createElement('thead');
+    var tbody2 = document.createElement('tbody');
 
-    let table3 = document.createElement('table');
-    let thead3 = document.createElement('thead');
-    let tbody3 = document.createElement('tbody');
+    var table3 = document.createElement('table');
+    var thead3 = document.createElement('thead');
+    var tbody3 = document.createElement('tbody');
 
     table.appendChild(thead);
     table.appendChild(tbody);
@@ -303,8 +303,8 @@ td{
             {
                 if(compararesultado[j].attributes[3].nodeValue == e.target.value)
                 {
-                    let row = document.createElement('tr');
-                    let heading = document.createElement('td');
+                    var row = document.createElement('tr');
+                    var heading = document.createElement('td');
                     heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody.appendChild(row);

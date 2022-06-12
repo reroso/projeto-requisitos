@@ -145,7 +145,7 @@ tr{
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
+    text-align: left;
     color: #152536;
 }
 td{
@@ -156,7 +156,7 @@ td{
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
-    text-align: center;
+    text-align: left;
     color: #152536;
     width: 400px;
 
@@ -203,14 +203,14 @@ td{
         </div>
         <div class="corpo_2">
             <div class="corpo_2_1">
-                <label class="corpo_label">Descrição</label>
+                <label class="corpo_label">Nivel</label>
                 <table id="body">
                 
                 </table>
                
             </div>
             <div class="corpo_2_2">
-                <label class="corpo_label">Posição</label>
+                <label class="corpo_label">Descricao</label>
                 <table id="body2">
         
                     <% @maturidades.each do |maturidade| %>                
@@ -261,13 +261,13 @@ td{
     var descricaoMaturidade = document.getElementsByClassName('descricaoMaturidade');
     var descricaoPosicao = document.getElementsByClassName('descricaoPosicao');
 
-    let table = document.createElement('table');
-    let thead = document.createElement('thead');
-    let tbody = document.createElement('tbody');
+    var table = document.createElement('table');
+    var thead = document.createElement('thead');
+    var tbody = document.createElement('tbody');
     
-    let table2 = document.createElement('table');
-    let thead2 = document.createElement('thead');
-    let tbody2 = document.createElement('tbody');
+    var table2 = document.createElement('table');
+    var thead2 = document.createElement('thead');
+    var tbody2 = document.createElement('tbody');
 
     table.appendChild(thead);
     table.appendChild(tbody);
@@ -290,15 +290,15 @@ td{
             {
                 if(comparaMaturidade[j].attributes[3].nodeValue == e.target.value)
                 {
-                    let row = document.createElement('tr');
-                    let heading = document.createElement('td');
-                    heading.innerHTML = descricaoMaturidade[j].attributes[3].nodeValue;
+                    var row = document.createElement('tr');
+                    var heading = document.createElement('td');
+                    heading.innerHTML = descricaoPosicao[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody.appendChild(row);
 
                     row = document.createElement('tr');
                     heading = document.createElement('td');
-                    heading.innerHTML = descricaoPosicao[j].attributes[3].nodeValue;
+                    heading.innerHTML = descricaoMaturidade[j].attributes[3].nodeValue;
                     row.appendChild(heading);
                     tbody2.appendChild(row);
                 }
