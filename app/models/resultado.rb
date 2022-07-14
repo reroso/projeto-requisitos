@@ -1,3 +1,3 @@
 class Resultado < ApplicationRecord
-    belongs_to :processo, optional: true
+    belongs_to :processo
 end

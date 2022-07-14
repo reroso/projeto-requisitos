@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_02_170838) do
+ActiveRecord::Schema.define(version: 2022_07_08_204926) do
 
   create_table "atividades", force: :cascade do |t|
     t.string "descricao"
@@ -73,6 +73,15 @@ ActiveRecord::Schema.define(version: 2022_06_02_170838) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "processo_maturidades", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "processo_id", null: false
+    t.integer "maturidade_id", null: false
+    t.index ["maturidade_id"], name: "index_processo_maturidades_on_maturidade_id"
+    t.index ["processo_id"], name: "index_processo_maturidades_on_processo_id"
+  end
+
   create_table "processos", force: :cascade do |t|
     t.string "descricao"
     t.datetime "created_at", precision: 6, null: false
@@ -101,6 +110,8 @@ ActiveRecord::Schema.define(version: 2022_06_02_170838) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "processo_maturidades", "maturidades"
+  add_foreign_key "processo_maturidades", "processos"
   add_foreign_key "processos", "dimensaos"
   add_foreign_key "resultados", "processos"
 end

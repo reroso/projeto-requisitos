@@ -92,20 +92,6 @@ html, body {
     text-align: center;
 
 }
-.corpo_2_1_1{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    text-align: center;
-    justify-content: space-evenly;
-}
-.corpo_2_1_2{
-    display: flex;
-    height: 95%;
-    width: 100%;
-    flex-direction: column;
-    text-align: center;
-}
 .corpo_2_2{
     display: flex;
     height: 100%;
@@ -114,11 +100,26 @@ html, body {
     text-align: center;
 
 }
+.corpo_2_2_1{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-evenly;
+}
+.corpo_2_2_2{
+    display: flex;
+    height: 95%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+}
 .corpo_2_3{
     display: flex;
     height: 100%;
     width: 33.3%;
     flex-direction: column;
+    align-items: baseline;
     text-align: center;
 
 }
@@ -168,6 +169,8 @@ tr{
     line-height: 28px;
     text-align: left;
     color: #152536;
+    justify-content: space-evenly;
+
 }
 td{
     padding: 10px 20px;
@@ -180,6 +183,8 @@ td{
     text-align: left;
     color: #152536;
     width: 400px;
+    justify-content: space-evenly;
+
 
 }
 .form_flex{
@@ -256,47 +261,48 @@ td a{
     </div>
     <div class="corpo">
         <div class="corpo_1">
-            <form action="/cadastroMaturidade/incluir_maturidade" method="post" class="formulario form_flex">
-
-                <label class="corpo_label hidden" id="label_posicao_hidden">Selecione a posição do nivel</label>
-                <%= select_tag(:posicao, options_for_select([['1', 1], ['2', 2],['3', 3], ['4', 4],['5', 5], ['6', 6],['7', 7], ['8', 8],['9', 9], ['10', 10], ]), prompt: "Escolha um nivel", class: "maturidade corpo_texto_select hidden") %>
-                <label class="corpo_label hidden" id="label_nivel_hidden">Cadastre o nivel de maturidade</label>
-                <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_nivel_hidden">
+            <form action="/cadastroProcessoMaturidade/incluir_processoMaturidade" method="post" class="formulario form_flex">
+                <label class="corpo_label hidden" id="label_processo_hidden">Selecione o Processo</label>
+                <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select hidden" %>
+                <label class="corpo_label hidden" id="label_maturidade_hidden">Selecione o nivel de Maturidade</label>
+                <%= select_tag "maturidade_id", options_from_collection_for_select(@maturidades, "id", "descricao"), prompt: "Escolha um nivel de maturidade", class: "maturidade corpo_texto_select hidden" %>
             
             </form>
             
         </div>
         <div class="corpo_2">
             <div class="corpo_2_1">
-                <div class="corpo_2_1_1">   
-                    <label class="corpo_label">Nivel</label>
-                    <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
-                </div>
-                <div class="corpo_2_1_2">   
-                     <table id="body">
+                <label class="corpo_label">Maturidade</label>
+                <table id="body">
                 
-                    </table>
-                </div>
+                </table>
                
             </div>
             <div class="corpo_2_2">
-                <label class="corpo_label">Descricao</label>
-                <table id="body2">
+                <div class="corpo_2_2_1">
+                    <label class="corpo_label">Processos</label>
+                    <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+                </div>
+                <div class="corpo_2_2_2">
+                    <table id="body2">
         
-                    <% @maturidades.each do |maturidade| %>                
-                        <input type="hidden" readonly="readonly" class="resultMaturidade" value="<%=maturidade.posicao%>">
-                        <input type="hidden" readonly="readonly" class="descricaoMaturidade" value="<%=maturidade.descricao%>">        
-                        <input type="hidden" readonly="readonly" class="descricaoPosicao" value="<%=maturidade.posicao%>">        
-                        <input type="hidden" readonly="readonly" class="idMaturidade" value="<%=maturidade.id%>">
+                    <% @processoMaturidades.each do |processoMaturidade| %>                
+                        <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processoMaturidade.processo.id%>">
+                        <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processoMaturidade.processo.descricao%>">
+                        <input type="hidden" readonly="readonly" class="descricaoMaturidade" value="<%=processoMaturidade.maturidade.descricao%>">
+                        <input type="hidden" readonly="readonly" class="idProcesso" value="<%=processoMaturidade.id%>">
+   
+                        
                     <%end%>
                 
                 </table>
+                </div>
+                
+                
             </div>
 
             <div class="corpo_2_3">
-                <table id="body3">
-                
-                </table>
+            
             </div>
           
         </div>
@@ -305,11 +311,11 @@ td a{
 </div>
 
 <script>
-     var formulario = document.getElementsByClassName('formulario');
+    var formulario = document.getElementsByClassName('formulario');
         for (var i = 0; i< formulario.length; i++){
           formulario[i].addEventListener('keydown', e => {
                 if(e.key == "Enter") {
-                    e.target.parentElement.parentElement.submit();
+                    e.target.parentElement.submit();
                 }
             })
         }
@@ -321,17 +327,18 @@ td a{
         formulario[i].addEventListener('keydown', e => {
             if(e.key == "Enter") {
                 console.log(e.target.parentElement);
-                e.target.parentElement.parentElement.submit();
+                e.target.parentElement.submit();
             }
         })
     }
     }
 
-    var selectMaturidade = document.getElementsByClassName("maturidade");
-    var comparaMaturidade = document.getElementsByClassName('resultMaturidade');
+    var selectProcesso = document.getElementsByClassName("processo");
+    var comparaProcesso = document.getElementsByClassName('resultProcesso');
+    var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
     var descricaoMaturidade = document.getElementsByClassName('descricaoMaturidade');
-    var descricaoPosicao = document.getElementsByClassName('descricaoPosicao');
-    var idMaturidade = document.getElementsByClassName('idMaturidade')
+    var idProcesso = document.getElementsByClassName('idProcesso')
+
 
     var table = document.createElement('table');
     var thead = document.createElement('thead');
@@ -340,6 +347,7 @@ td a{
     var table2 = document.createElement('table');
     var thead2 = document.createElement('thead');
     var tbody2 = document.createElement('tbody');
+    
 
     table.appendChild(thead);
     table.appendChild(tbody);
@@ -349,53 +357,56 @@ td a{
 
     document.getElementById('body').appendChild(table);
     document.getElementById('body2').appendChild(table2);
-
     i = 0;
-    while( i < selectMaturidade.length) {
-        
-        selectMaturidade[i].addEventListener('change', e => {
+
+    while( i < selectProcesso.length) {
+        selectProcesso[i].addEventListener('change', e => {
             e.target.nextElementSibling.value = e.target.value;
             tbody.innerText = "";
             tbody2.innerText = "";
-
-            for(var j = 0 ; j < comparaMaturidade.length; j++)
+            
+            for(var j = 0 ; j < comparaProcesso.length; j++)
             {
-                if(comparaMaturidade[j].attributes[3].nodeValue == e.target.value)
+                if(comparaProcesso[j].attributes[3].nodeValue == e.target.value)
                 {
-                    var k = idMaturidade[j].attributes[3].nodeValue
+                    var k = idProcesso[j].attributes[3].nodeValue
                     var row = document.createElement('tr');
                     var heading = document.createElement('td');
-                    heading.innerHTML = descricaoPosicao[j].attributes[3].nodeValue;
+                    heading.innerHTML = descricaoMaturidade[j].attributes[3].nodeValue;
                     row.appendChild(heading);
+                    tbody.classList.add("espaco_tabela");
                     tbody.appendChild(row);
-
+                
                     row = document.createElement('tr');
                     heading = document.createElement('td');
-                    heading2 = document.createElement('td');
-                    heading.innerHTML = `<form action="/cadastroMaturidade/${k}/salvar_maturidade" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="${descricaoMaturidade[j].attributes[3].nodeValue}" style="background-color:transparent; border: none;"></form>`
-                    heading2.innerHTML = `<a href=/cadastroMaturidade/${k}/excluir_maturidade>X<a>`;
+                    heading2 = document.createElement('td'); 
+                    heading.innerHTML = `<form action="/cadastroProcessoMaturidade/${k}/salvar_processoMaturidade" method="post" class="formulario"><input class="corpo_edita_input" name ="processo_id" type="text" value="${descricaoProcesso[j].attributes[3].nodeValue}" style="background-color:transparent; border: none;"></form>`
+                    heading2.innerHTML = `<a href=/cadastroProcessoMaturidade/${k}/excluir_processoMaturidade>X<a>`;
                     heading.classList.add("celula_editar");
                     heading2.classList.add("celula_excluir");
                     row.appendChild(heading);
                     row.appendChild(heading2);
                     tbody2.appendChild(row);
                 }
-
             }
-        })         
+        })
         i++;
     }
-    
-    var labelPosicaoInvisivel = document.getElementById("label_posicao_hidden");
-    var selectPosicaoInvisivel = document.getElementById("posicao");
-    var labelNivelInvisivel = document.getElementById("label_nivel_hidden");
-    var inputNivelInvisivel = document.getElementById("input_nivel_hidden");
-    
+
+
+
+    var labelProcessoInvisivel = document.getElementById("label_processo_hidden");
+    var selectProcessoInvisivel = document.getElementById("processo_id");
+    var labelMaturidadeInvisivel = document.getElementById("label_maturidade_hidden");
+    var selectMaturidadeInvisivel = document.getElementById("maturidade_id");
+
     function funcao(){
-        labelPosicaoInvisivel.classList.remove('hidden');
-        selectPosicaoInvisivel.classList.remove('hidden');
-        labelNivelInvisivel.classList.remove('hidden');
-        inputNivelInvisivel.classList.remove('hidden');
+        
+        labelProcessoInvisivel.classList.remove('hidden');
+        selectProcessoInvisivel.classList.remove('hidden');
+        labelMaturidadeInvisivel.classList.remove('hidden');
+        selectMaturidadeInvisivel.classList.remove('hidden');
+    
     }
 </script>
 

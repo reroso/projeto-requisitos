@@ -21,6 +21,12 @@ class CadastroController < ApplicationController
       @maturidades = Maturidade.all
     end
 
+    def indexProcessoMaturidade
+      @processos = Processo.all
+      @maturidades = Maturidade.all
+      @processoMaturidades = ProcessoMaturidade.all
+    end
+
     #dimensao
 
     def incluir_dimensao
@@ -143,4 +149,36 @@ class CadastroController < ApplicationController
       maturidade.descricao = params[:descricao]
       maturidade.save
     end
+
+    #processoMaturidades
+
+  def incluir_processoMaturidade
+    processoMaturidade = ProcessoMaturidade.new
+    processoMaturidade.processo_id = params[:processo_id]
+    processoMaturidade.maturidade_id = params[:maturidade_id]
+
+    processoMaturidade.save
+    
+    redirect_to "/cadastroProcessoMaturidade"
+  end
+
+  def salvar_processoMaturidade
+    processoMaturidade = ProcessoMaturidade.find(params[:id])
+    processoMaturidade.processo_id = params[:processo_id]
+    processoMaturidade.save
+
+    redirect_to "/cadastroProcessoMaturidade"
+  end
+
+  def excluir_processoMaturidade
+    processoMaturidade = ProcessoMaturidade.find(params[:id])
+    processoMaturidade.destroy
+    redirect_to "/cadastroProcessoMaturidade"
+  end
+
+  def alterar_processoMaturidade
+    processoMaturidade = ProcessoMaturidade.new
+    processoMaturidade.descricao = params[:descricao]
+    processoMaturidade.save
+  end
 end

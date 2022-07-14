@@ -24,28 +24,35 @@ html, body {
 .cabecalho_1{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
     align-items: center;
     justify-content: center;   
 }
 .cabecalho_2{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_3{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_4{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
+    align-items: center;
+    justify-content: center;  
+}
+.cabecalho_5{
+    display: flex;
+    height: 100%;
+    width: 20%;
     align-items: center;
     justify-content: center;  
 }
@@ -93,6 +100,20 @@ html, body {
     text-align: center;
 
 }
+.corpo_2_2_1{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-evenly;
+}
+.corpo_2_2_2{
+    display: flex;
+    height: 95%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+}
 .corpo_2_3{
     display: flex;
     height: 100%;
@@ -104,7 +125,7 @@ html, body {
 }
 A{
     text-decoration: none;
-    color: black;
+    color: white;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 900;
@@ -138,6 +159,15 @@ A{
     color: #6C757D;
     width: 50%;
 }
+.corpo_edita_input{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #152536;
+    width: 100%;
+}
 tr{
     padding: 10px 20px;
     border: 1px solid #000;
@@ -163,14 +193,43 @@ td{
     color: #152536;
     width: 400px;
     justify-content: space-evenly;
-
-
 }
 .form_flex{
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     height: 100%;
+}
+.celula_editar{
+    border-width: 1px 0 1px 1px;
+    position: relative;
+}
+.celula_excluir{
+    border-width: 1px 1px 1px 0;
+    text-align: right;
+    position: relative;
+    left: -2px;
+
+}
+.hidden{
+    display: none;
+}
+.botao_adicionar{
+    background-color: #7749F8;
+    color: white;
+    display: inline-block;
+    font-size: 20px;
+    border: 1px;
+    height: fit-content;
+}
+td a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 16px;
 }
 </style>
 </head>
@@ -190,6 +249,9 @@ td{
         <div class="cabecalho_4">
             <a href="/cadastroMaturidade">Nivel de Maturidade</a>
         </div>
+        <div class="cabecalho_5">
+            <a href="/cadastroProcessoMaturidade">Processo por Maturidade</a>
+        </div>
     </div>
     <div class="titulos">
         <h1>Gerencia de Requisitos - PRMC</h1>
@@ -198,10 +260,10 @@ td{
         <div class="corpo_1">
             <form action="/cadastroProcesso/incluir_processo" method="post" class="formulario form_flex">
 
-                <label class="corpo_label">Selecione a Dimensão</label>
-                <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensão", class: "dimensao corpo_texto_select" %>
-                <label class="corpo_label">Cadastre o Processo</label>
-                <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao">
+                <label class="corpo_label hidden" id="label_dimensao_hidden">Selecione a Dimensão</label>
+                <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensão", class: "dimensao corpo_texto_select hidden" %>
+                <label class="corpo_label hidden" id="label_processo_hidden">Cadastre o Processo</label>
+                <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_processo_hidden">
             
             </form>
             
@@ -215,19 +277,22 @@ td{
                
             </div>
             <div class="corpo_2_2">
-                <label class="corpo_label">Processos</label>
-                <table id="body2">
-        
-                    <% @processos.each do |processo| %>                
-                        <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
-                        <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">
-                        <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=processo.dimensao.descricao%>">
-                        <input type="hidden" readonly="readonly" class="idProcesso" value="<%=processo.id%>">
-   
-        
-                    <%end%>
-                
-                </table>
+                <div class="corpo_2_2_1">
+                    <label class="corpo_label">Processos</label>
+                    <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+                </div>
+                <div class="corpo_2_2_2">
+                    <table id="body2">
+            
+                        <% @processos.each do |processo| %>                
+                            <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
+                            <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">
+                            <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=processo.dimensao.descricao%>">
+                            <input type="hidden" readonly="readonly" class="idProcesso" value="<%=processo.id%>">
+                        <%end%>
+                    
+                    </table>
+                </div>
             </div>
 
             <div class="corpo_2_3">
@@ -263,13 +328,13 @@ td{
     }
 
     var selectDimensao = document.getElementsByClassName("dimensao");
-    var inputDimensao = document.getElementsByClassName('inputElDimensao');
     var comparaProcesso = document.getElementsByClassName('resultProcesso');
     var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
     var descricaoDimensao = document.getElementsByClassName('descricaoDimensao');
     var idProcesso = document.getElementsByClassName('idProcesso')
     var formProcesso = document.getElementById('formProcesso');
     
+
     var table = document.createElement('table');
     var thead = document.createElement('thead');
     var tbody = document.createElement('tbody');
@@ -288,6 +353,8 @@ td{
     document.getElementById('body').appendChild(table);
     document.getElementById('body2').appendChild(table2);
     i = 0;
+    
+
     while( i < selectDimensao.length) {
         
         selectDimensao[i].addEventListener('change', e => {
@@ -305,14 +372,16 @@ td{
                     var heading = document.createElement('td');
                     heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
                     row.appendChild(heading);
+                    tbody.classList.add("espaco_tabela");
                     tbody.appendChild(row);
 
                     row = document.createElement('tr');
                     heading = document.createElement('td');
                     heading2 = document.createElement('td'); 
-                    //formProcesso[0].defaultValue = descricaoProcesso[j].attributes[3].nodeValue;                        
-                    heading.innerHTML = `<fieldset><form action="/cadastroProcesso/${k}/salvar_processo" method="post" class="formulario"><textarea type="text" name="descricao" style="background-color:transparent; border: none;">${descricaoProcesso[j].attributes[3].nodeValue}</textarea></form></fieldset>`;
+                    heading.innerHTML = `<form action="/cadastroProcesso/${k}/salvar_processo" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="${descricaoProcesso[j].attributes[3].nodeValue}" style="background-color:transparent; border: none;"></form>`
                     heading2.innerHTML = `<a href=/cadastroProcesso/${k}/excluir_processo>X<a>`;
+                    heading.classList.add("celula_editar");
+                    heading2.classList.add("celula_excluir");
                     row.appendChild(heading);
                     row.appendChild(heading2);
                     tbody2.appendChild(row);
@@ -322,6 +391,19 @@ td{
             }
         })         
         i++;
+    }
+
+    var inputProcessoInvisivel = document.getElementById("input_processo_hidden");
+    var selectDimensaoInvisivel = document.getElementById("dimensao_id");
+    var labelDimensaoInvisivel = document.getElementById("label_dimensao_hidden");
+    var labelProcessoInvisivel = document.getElementById("label_processo_hidden");
+
+    function funcao(){
+        
+        labelDimensaoInvisivel.classList.remove('hidden');
+        selectDimensaoInvisivel.classList.remove('hidden');
+        labelProcessoInvisivel.classList.remove('hidden');
+        inputProcessoInvisivel.classList.remove('hidden');
     }
 </script>
 

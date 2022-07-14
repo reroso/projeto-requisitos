@@ -24,28 +24,35 @@ html, body {
 .cabecalho_1{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
     align-items: center;
     justify-content: center;   
 }
 .cabecalho_2{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_3{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_4{
     display: flex;
     height: 100%;
-    width: 25%;
+    width: 20%;
+    align-items: center;
+    justify-content: center;  
+}
+.cabecalho_5{
+    display: flex;
+    height: 100%;
+    width: 20%;
     align-items: center;
     justify-content: center;  
 }
@@ -100,6 +107,20 @@ html, body {
     flex-direction: column;
     text-align: center;
 
+}
+.corpo_2_3_1{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    justify-content: space-evenly;
+}
+.corpo_2_3_2{
+    display: flex;
+    height: 95%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
 }
 A{
     text-decoration: none;
@@ -167,6 +188,45 @@ td{
     flex-direction: column;
     height: 100%;
 }
+.hidden{
+    display: none;
+}
+.botao_adicionar{
+    background-color: #7749F8;
+    color: white;
+    display: inline-block;
+    font-size: 20px;
+    border: 1px;
+    height: fit-content;
+}
+.celula_editar{
+    border-width: 1px 0 1px 1px;
+    position: relative;
+}
+.celula_excluir{
+    border-width: 1px 1px 1px 0;
+    text-align: right;
+    position: relative;
+    left: -2px;
+}
+td a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 900;
+    font-size: 18px;
+    line-height: 16px;
+}
+.corpo_edita_input{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    color: #152536;
+    width: 100%;
+}
 </style>
 </head>
 <body>
@@ -180,10 +240,13 @@ td{
             <a href="/cadastroProcesso">Processo</a>
         </div>
         <div class="cabecalho_3">
-            <a href="/cadastroResultado">Resultados Esperados</a>
+            <a href="/cadastroResultado">Resultado Esperado</a>
         </div>
-         <div class="cabecalho_4">
+        <div class="cabecalho_4">
             <a href="/cadastroMaturidade">Nivel de Maturidade</a>
+        </div>
+        <div class="cabecalho_5">
+            <a href="/cadastroProcessoMaturidade">Processo por Maturidade</a>
         </div>
     </div>
     <div class="titulos">
@@ -193,10 +256,10 @@ td{
         <div class="corpo_1">
             <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario form_flex">
 
-                <label class="corpo_label">Selecione o Processo</label>
-                <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select" %>
-                <label class="corpo_label">Cadastre o Resultado</label>
-                <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao">
+                <label class="corpo_label hidden" id="label_processo_hidden">Selecione o Processo</label>
+                <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select hidden" %>
+                <label class="corpo_label hidden" id="label_resultado_hidden">Cadastre o Resultado</label>
+                <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_resultado_hidden">
             
             </form>
             
@@ -218,16 +281,22 @@ td{
                         <input type="hidden" readonly="readonly" class="descricaoResultado" value="<%=resultado.descricao%>">        
                         <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=resultado.processo.descricao%>">        
                         <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=resultado.processo.dimensao.descricao%>">        
+                        <input type="hidden" readonly="readonly" class="idResultado" value="<%=resultado.id%>">
                     <%end%>
                 
                 </table>
             </div>
 
             <div class="corpo_2_3">
-                <label class="corpo_label">Resultados Esperados</label>
+                <div class="corpo_2_3_1">
+                    <label class="corpo_label">Resultados Esperados</label>
+                    <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+                </div>
+                <div class="corpo_2_3_2">
                 <table id="body3">
                 
                 </table>
+                </div>
             </div>
           
         </div>
@@ -264,6 +333,7 @@ td{
     var descricaoResultado = document.getElementsByClassName('descricaoResultado');
     var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
     var descricaoDimensao = document.getElementsByClassName('descricaoDimensao');
+    var idResultado = document.getElementsByClassName('idResultado')
 
     
 
@@ -303,6 +373,8 @@ td{
             {
                 if(compararesultado[j].attributes[3].nodeValue == e.target.value)
                 {
+                    
+                    var k = idResultado[j].attributes[3].nodeValue
                     var row = document.createElement('tr');
                     var heading = document.createElement('td');
                     heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
@@ -317,14 +389,32 @@ td{
 
                     row = document.createElement('tr');
                     heading = document.createElement('td');
-                    heading.innerHTML = descricaoResultado[j].attributes[3].nodeValue;
+                    heading2 = document.createElement('td');
+                    heading.innerHTML = `<form action="/cadastroResultado/${k}/salvar_resultado" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="${descricaoResultado[j].attributes[3].nodeValue}" style="background-color:transparent; border: none;"></form>`
+                    heading2.innerHTML = `<a href=/cadastroResultado/${k}/excluir_resultado>X<a>`;
+                    heading.classList.add("celula_editar");
+                    heading2.classList.add("celula_excluir");
+                    //heading.innerHTML = descricaoResultado[j].attributes[3].nodeValue;
                     row.appendChild(heading);
+                    row.appendChild(heading2);
                     tbody3.appendChild(row);
                 }
 
             }
         })         
         i++;
+    }
+
+    var labelProcessoInvisivel = document.getElementById("label_processo_hidden");
+    var selectProcessoInvisivel = document.getElementById("processo_id");
+    var labelResultadoInvisivel = document.getElementById("label_resultado_hidden");
+    var inputResultadoInvisivel = document.getElementById("input_resultado_hidden");
+
+    function funcao(){
+        labelProcessoInvisivel.classList.remove('hidden'); 
+        selectProcessoInvisivel.classList.remove('hidden');
+        labelResultadoInvisivel.classList.remove('hidden');
+        inputResultadoInvisivel.classList.remove('hidden');
     }
     
     
