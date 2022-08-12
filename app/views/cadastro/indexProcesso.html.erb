@@ -3,58 +3,71 @@
 <head>
 <style>
 html, body {
-  height: 100%;
-  width: 100%;
-  background: #F5F5F5;
+    height: 100%;
+    width: 100%;
+    background: #F5F5F5;
 }
 .tela{
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.tela_1{
+    height: 100%;
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+}
+.tela_2{
+    height: 100%;
+    width: 95%;
     display: flex;
     flex-direction: column;
 }
 .cabecalho{
     background: #7749F8;
     border-radius: 4px;
-    height: 5%;
+    height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 .cabecalho_1{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 20%;
+    width: 100%;
     align-items: center;
-    justify-content: center;   
+    justify-content: center; 
 }
 .cabecalho_2{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 20%;
+    width: 100%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_3{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 20%;
+    width: 100%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_4{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 20%;
+    width: 100%;
     align-items: center;
-    justify-content: center;  
+    justify-content: center;
 }
 .cabecalho_5{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 20%;
+    width: 100%;
+    justify-content: center;
     align-items: center;
-    justify-content: center;  
+    margin:auto;    
 }
 .titulos{
     display: flex;
@@ -69,17 +82,10 @@ html, body {
     display: flex;
     flex-direction: row;
 } 
-.corpo_1{
-    display: flex;
-    flex-direction: column;
-    height: 25%;
-    width: 30%;
-    justify-content: space-around;
-}
 .corpo_2{
     display: flex;
     height: 100%;
-    width: 70%;
+    width: 100%;
     align-items: center;
     justify-content: center; 
     flex-direction: row;
@@ -90,7 +96,22 @@ html, body {
     width: 33.3%;
     flex-direction: column;
     text-align: center;
-
+}
+.corpo_2_1_1{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly; 
+    
+}
+.corpo_2_1_2{
+    display: flex;
+    height: 95%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
 }
 .corpo_2_2{
     display: flex;
@@ -148,7 +169,7 @@ A{
     font-size: 20px;
     line-height: 21px;
     color: #6C757D;
-    width: 51.8%;
+    width: 100%;
 }
 .corpo_texto_input{
     font-family: 'Inter';
@@ -191,7 +212,7 @@ td{
     line-height: 28px;
     text-align: left;
     color: #152536;
-    width: 400px;
+    width: 1%;
     justify-content: space-evenly;
 }
 .form_flex{
@@ -236,72 +257,71 @@ td a{
 <body>
     
 <div class="tela">
-    <div class="cabecalho">
-        <div class="cabecalho_1">
-            <a href="/cadastro">Dimensão</a>
-        </div>
-        <div class="cabecalho_2">
-            <a href="/cadastroProcesso">Processo</a>
-        </div>
-        <div class="cabecalho_3">
-            <a href="/cadastroResultado">Resultado Esperado</a>
-        </div>
-        <div class="cabecalho_4">
-            <a href="/cadastroMaturidade">Nivel de Maturidade</a>
-        </div>
-        <div class="cabecalho_5">
-            <a href="/cadastroProcessoMaturidade">Processo por Maturidade</a>
+    <div class=tela_1>
+        <div class="cabecalho">
+            <div class="cabecalho_1">
+                <a href="/cadastro">Dimensão</a>
+            </div>
+            <div class="cabecalho_2">
+                <a href="/cadastroProcesso">Processo</a>
+            </div>
+            <div class="cabecalho_3">
+                <a href="/cadastroResultado">Resultado Esperado</a>
+            </div>
+            <div class="cabecalho_4">
+                <a href="/cadastroMaturidade">Nivel de Maturidade</a>
+            </div>
+            <div class="cabecalho_5">
+                <a href="/cadastroProcessoMaturidade">Processo por Maturidade</a>
+            </div>
         </div>
     </div>
-    <div class="titulos">
-        <h1>Gerencia de Requisitos - PRMC</h1>
-    </div>
-    <div class="corpo">
-        <div class="corpo_1">
-            <form action="/cadastroProcesso/incluir_processo" method="post" class="formulario form_flex">
-
-                <label class="corpo_label hidden" id="label_dimensao_hidden">Selecione a Dimensão</label>
-                <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensão", class: "dimensao corpo_texto_select hidden" %>
-                <label class="corpo_label hidden" id="label_processo_hidden">Cadastre o Processo</label>
-                <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_processo_hidden">
-            
-            </form>
-            
+    <div class="tela_2">
+        <div class="titulos">
+            <h1>Gerencia de Requisitos - PRMC</h1>
         </div>
-        <div class="corpo_2">
-            <div class="corpo_2_1">
-                <label class="corpo_label">Dimensões</label>
-                <table id="body">
+        <div class="corpo">
+            <div class="corpo_2">
+                <div class="corpo_2_1">
+                        <div class="corpo_2_1_1">
+                            <label class="corpo_label">Dimensões</label>
+                            <form action="/cadastroProcesso/incluir_processo" method="post" class="formulario form_flex">
+                                <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensão", class: "dimensao corpo_texto_select hidden" %>
+                        </div>
+                        <div class="corpo_2_1_2">
+                            <table id="body">
+                            
+                            </table>
+                        </div>
+                </div>
+                <div class="corpo_2_2">
+                    <div class="corpo_2_2_1">
+                        <label class="corpo_label">Processos</label>
+                            <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_processo_hidden">
+                        </form>
+                        <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+                    </div>
+                    <div class="corpo_2_2_2">
+                        <table id="body2">
                 
-                </table>
-               
-            </div>
-            <div class="corpo_2_2">
-                <div class="corpo_2_2_1">
-                    <label class="corpo_label">Processos</label>
-                    <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+                            <% @processos.each do |processo| %>                
+                                <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
+                                <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">
+                                <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=processo.dimensao.descricao%>">
+                                <input type="hidden" readonly="readonly" class="idProcesso" value="<%=processo.id%>">
+                            <%end%>
+                        
+                        </table>
+                    </div>
                 </div>
-                <div class="corpo_2_2_2">
-                    <table id="body2">
-            
-                        <% @processos.each do |processo| %>                
-                            <input type="hidden" readonly="readonly" class="resultProcesso" value="<%=processo.dimensao.id%>">
-                            <input type="hidden" readonly="readonly" class="descricaoProcesso" value="<%=processo.descricao%>">
-                            <input type="hidden" readonly="readonly" class="descricaoDimensao" value="<%=processo.dimensao.descricao%>">
-                            <input type="hidden" readonly="readonly" class="idProcesso" value="<%=processo.id%>">
-                        <%end%>
-                    
-                    </table>
-                </div>
-            </div>
 
-            <div class="corpo_2_3">
+                <div class="corpo_2_3">
+                
+                </div>
             
             </div>
-          
         </div>
     </div>
-
 </div>
 
 <script>
@@ -320,7 +340,6 @@ td a{
     for (var i = 0; i< formulario.length; i++){
         formulario[i].addEventListener('keydown', e => {
             if(e.key == "Enter") {
-                console.log(e.target.parentElement);
                 e.target.parentElement.parentElement.submit();
             }
         })
@@ -343,7 +362,6 @@ td a{
     var thead2 = document.createElement('thead');
     var tbody2 = document.createElement('tbody');
     
-
     table.appendChild(thead);
     table.appendChild(tbody);
 
@@ -354,11 +372,10 @@ td a{
     document.getElementById('body2').appendChild(table2);
     i = 0;
     
-
     while( i < selectDimensao.length) {
         
         selectDimensao[i].addEventListener('change', e => {
-            e.target.nextElementSibling.value = e.target.value;
+            e.target.nextElementSibling = e.target.value;
             tbody.innerText = "";
             tbody2.innerText = "";
             
@@ -395,14 +412,10 @@ td a{
 
     var inputProcessoInvisivel = document.getElementById("input_processo_hidden");
     var selectDimensaoInvisivel = document.getElementById("dimensao_id");
-    var labelDimensaoInvisivel = document.getElementById("label_dimensao_hidden");
-    var labelProcessoInvisivel = document.getElementById("label_processo_hidden");
 
     function funcao(){
         
-        labelDimensaoInvisivel.classList.remove('hidden');
         selectDimensaoInvisivel.classList.remove('hidden');
-        labelProcessoInvisivel.classList.remove('hidden');
         inputProcessoInvisivel.classList.remove('hidden');
     }
 </script>

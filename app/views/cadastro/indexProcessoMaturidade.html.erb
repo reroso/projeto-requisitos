@@ -266,7 +266,7 @@ td a{
                 <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select hidden" %>
                 <label class="corpo_label hidden" id="label_maturidade_hidden">Selecione o nivel de Maturidade</label>
                 <%= select_tag "maturidade_id", options_from_collection_for_select(@maturidades, "id", "descricao"), prompt: "Escolha um nivel de maturidade", class: "maturidade corpo_texto_select hidden" %>
-            
+                
             </form>
             
         </div>
