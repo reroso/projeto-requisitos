@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+</style>
+</head>
+<body>
+    <div class="row">
+  <div class="container login col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+    <br />
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="title-login">Login</h1>
+      </div>
+      <div class="panel-body">
+        <form method="post">
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-user" style="width: auto"></i>
+              </span>
+              <input id="txtUsuario" runat="server" type="text" class="form-control" name="username" placeholder="Usuário" required="" />
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <i class="glyphicon glyphicon-lock" style="width: auto"></i>
+              </span>
+              <input id="txtSenha" runat="server" type="password" class="form-control" name="password" placeholder="Senha" required="" />
+            </div>
+          </div>
+          <!--div class="alert alert-danger">
+            <strong>Atenção!</strong> Usuário e/ou senha incorretos.
+          </div-->
+          <div>
+            <input class="btn btn-xm btn-block btn-entrar" type="submit" value="Entrar" onclick="return Login()" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    var usuarios = [
+    {"login": "bcf", "senha": "bcf"},
+    {"login": "mamae", "senha": "abacaxi"},
+    {"login": "papai", "senha": "melancia"},
+    ];
+
+    function Login() {
+        var usuario = document.getElementsByName('username')[0].value.toLowerCase();
+        var senha = document.getElementsByName('password')[0].value;
+
+        for (var u in usuarios) {
+            var us = usuarios[u];
+            if (us.login === usuario && us.senha === senha) {
+                window.location = "index.html";
+                return true;
+            }
+        }
+        alert("Dados incorretos, tente novamente.");
+        return false;
+    }
+</script>
+</body>
+</html>

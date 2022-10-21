@@ -19,12 +19,18 @@ class CadastroController < ApplicationController
 
     def indexMaturidade
       @maturidades = Maturidade.all
+      @processos = Processo.all
     end
 
     def indexProcessoMaturidade
+      @dimensaos = Dimensao.all
       @processos = Processo.all
       @maturidades = Maturidade.all
+      @resultados = Resultado.all
       @processoMaturidades = ProcessoMaturidade.all
+    end
+
+    def indexLogin
     end
 
     #dimensao
@@ -123,8 +129,8 @@ class CadastroController < ApplicationController
 
     def incluir_maturidade
       maturidade = Maturidade.new
-      maturidade.descricao = params[:descricao]
       maturidade.posicao = params[:posicao]
+      maturidade.descricao = params[:descricao]
       maturidade.save
       
       redirect_to "/cadastroMaturidade"

@@ -35,38 +35,31 @@ html, body {
 }
 .cabecalho_1{
     display: flex;
-    height: 20%;
+    height: 25%;
     width: 100%;
     align-items: center;
     justify-content: center; 
 }
 .cabecalho_2{
     display: flex;
-    height: 20%;
+    height: 25%;
     width: 100%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_3{
     display: flex;
-    height: 20%;
+    height: 25%;
     width: 100%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_4{
     display: flex;
-    height: 20%;
+    height: 25%;
     width: 100%;
     align-items: center;
     justify-content: center;
-}
-.cabecalho_5{
-    display: flex;
-    height: 20%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;   
 }
 .titulos{
     display: flex;
@@ -81,13 +74,6 @@ html, body {
     display: flex;
     flex-direction: row;
 } 
-.corpo_1{
-    display: flex;
-    flex-direction: column;
-    height: 25%;
-    width: 30%;
-    justify-content: space-around;
-}
 .corpo_2{
     display: flex;
     height: 100%;
@@ -172,7 +158,6 @@ A{
     font-size: 20px;
     line-height: 21px;
     color: #6C757D;
-    width: 100%;
 }
 .corpo_texto_input{
     font-family: 'Inter';
@@ -251,7 +236,6 @@ td a{
     font-size: 16px;
     line-height: 21px;
     color: #152536;
-    width: 100%;
 }
 </style>
 </head>
@@ -272,9 +256,6 @@ td a{
             <div class="cabecalho_4">
                 <a href="/cadastroMaturidade">Nivel<br> Maturidade</a>
             </div>
-            <div class="cabecalho_5">
-                <a href="/cadastroProcessoMaturidade">Processo<br> Maturidade</a>
-            </div>
         </div>
     </div>
     <div class=tela_2>
@@ -285,8 +266,10 @@ td a{
             <div class="corpo_2">
                 <div class="corpo_2_1">
                     <label class="corpo_label">Dimensões</label>
-                    <table id="body">
+                    <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensao", class: "dimensao corpo_texto_select" %>
                     
+                    <table id="body">
+
                     </table>
                 
                 </div>
@@ -294,7 +277,7 @@ td a{
                     <div class="corpo_2_2_1">
                         <label class="corpo_label">Processos</label>
                         <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario form_flex">
-                            <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select hidden" %>
+                            <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select" %>
                             
                     </div>
                     <div class="corpo_2_2_2">
@@ -315,9 +298,9 @@ td a{
                 <div class="corpo_2_3">
                     <div class="corpo_2_3_1">
                         <label class="corpo_label">Resultados Esperados</label>
-                            <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_resultado_hidden">
+                            <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao" id="input_resultado_hidden">
+                            <input type="submit" value="+" class="botao_adicionar" id="click_button">
                         </form>
-                        <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
                     </div>
                     <div class="corpo_2_3_2">
                         <table id="body3">
@@ -360,8 +343,8 @@ td a{
     var descricaoResultado = document.getElementsByClassName('descricaoResultado');
     var descricaoProcesso = document.getElementsByClassName('descricaoProcesso');
     var descricaoDimensao = document.getElementsByClassName('descricaoDimensao');
-    var idResultado = document.getElementsByClassName('idResultado')
-
+    var idResultado = document.getElementsByClassName('idResultado');
+    var selectDimensao = document.getElementsByClassName('dimensao');
     
 
     var table = document.createElement('table');
@@ -434,13 +417,16 @@ td a{
         i++;
     }
 
-    var selectProcessoInvisivel = document.getElementById("processo_id");
-    var inputResultadoInvisivel = document.getElementById("input_resultado_hidden");
-
-    function funcao(){
-        selectProcessoInvisivel.classList.remove('hidden');
-        inputResultadoInvisivel.classList.remove('hidden');
+    i = 0;
+    while( i < selectDimensao.length) {
+        
+        selectDimensao[i].addEventListener('change', e => {
+            console.log(e.target.value);
+        })         
+        i++;
     }
+
+    
     
     
 </script>

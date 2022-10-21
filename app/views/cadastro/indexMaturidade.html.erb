@@ -11,50 +11,55 @@ html, body {
     height: 100%;
     width: 100%;
     display: flex;
+    flex-direction: row;
+}
+.tela_1{
+    height: 100%;
+    width: 6%;
+    display: flex;
+    flex-direction: column;
+}
+.tela_2{
+    height: 100%;
+    width: 94%;
+    display: flex;
     flex-direction: column;
 }
 .cabecalho{
     background: #7749F8;
     border-radius: 4px;
-    height: 5%;
+    height: 100%;
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 .cabecalho_1{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 25%;
+    width: 100%;
     align-items: center;
-    justify-content: center;   
+    justify-content: center; 
 }
 .cabecalho_2{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 25%;
+    width: 100%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_3{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 25%;
+    width: 100%;
     align-items: center;
     justify-content: center;  
 }
 .cabecalho_4{
     display: flex;
-    height: 100%;
-    width: 20%;
+    height: 25%;
+    width: 100%;
     align-items: center;
-    justify-content: center;  
-}
-.cabecalho_5{
-    display: flex;
-    height: 100%;
-    width: 20%;
-    align-items: center;
-    justify-content: center;  
+    justify-content: center;
 }
 .titulos{
     display: flex;
@@ -68,18 +73,11 @@ html, body {
     width: 100%;
     display: flex;
     flex-direction: row;
-} 
-.corpo_1{
-    display: flex;
-    flex-direction: column;
-    height: 25%;
-    width: 30%;
-    justify-content: space-around;
 }
 .corpo_2{
     display: flex;
     height: 100%;
-    width: 70%;
+    width: 100%;
     align-items: center;
     justify-content: center; 
     flex-direction: row;
@@ -90,7 +88,6 @@ html, body {
     width: 33.3%;
     flex-direction: column;
     text-align: center;
-
 }
 .corpo_2_1_1{
     display: flex;
@@ -101,7 +98,7 @@ html, body {
 }
 .corpo_2_1_2{
     display: flex;
-    height: 95%;
+    height: 100%;
     width: 100%;
     flex-direction: column;
     text-align: center;
@@ -112,7 +109,21 @@ html, body {
     width: 33.4%;
     flex-direction: column;
     text-align: center;
-
+}
+.corpo_2_2_1{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.corpo_2_2_2{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
 }
 .corpo_2_3{
     display: flex;
@@ -120,7 +131,21 @@ html, body {
     width: 33.3%;
     flex-direction: column;
     text-align: center;
-
+}
+.corpo_2_3_1{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.corpo_2_3_2{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
 }
 A{
     text-decoration: none;
@@ -158,7 +183,7 @@ A{
     color: #6C757D;
     width: 50%;
 }
-tr{
+th, td{
     padding: 10px 20px;
     border: 1px solid #000;
     font-family: 'Inter';
@@ -168,19 +193,6 @@ tr{
     line-height: 28px;
     text-align: left;
     color: #152536;
-}
-td{
-    padding: 10px 20px;
-    border: 1px solid #000;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 28px;
-    text-align: left;
-    color: #152536;
-    width: 400px;
-
 }
 .form_flex{
     display: flex;
@@ -208,7 +220,7 @@ td{
     color: #152536;
     width: 100%;
 }
-td a{
+th a{
     text-decoration: none;
     color: black;
     font-family: 'Inter';
@@ -220,92 +232,130 @@ td a{
 .celula_editar{
     border-width: 1px 0 1px 1px;
     position: relative;
-    padding-right: 0px;
 }
 .celula_excluir{
     border-width: 1px 1px 1px 0;
     text-align: right;
     position: relative;
     left: -2px;
-    padding-left: 0px;
 }
+.overflow{
+    overflow:auto;
+    display: flex;
+    flex-direction: column;
+}
+
+
 </style>
 </head>
 <body>
     
 <div class="tela">
-    <div class="cabecalho">
-        <div class="cabecalho_1">
-            <a href="/cadastro">Dimensão</a>
-        </div>
-        <div class="cabecalho_2">
-            <a href="/cadastroProcesso">Processo</a>
-        </div>
-        <div class="cabecalho_3">
-            <a href="/cadastroResultado">Resultado Esperado</a>
-        </div>
-        <div class="cabecalho_4">
-            <a href="/cadastroMaturidade">Nivel de Maturidade</a>
-        </div>
-        <div class="cabecalho_5">
-            <a href="/cadastroProcessoMaturidade">Processo por Maturidade</a>
+    <div class="tela_1">
+        <div class="cabecalho">
+            <div class="cabecalho_1">
+                <a href="/cadastro">Dimensão</a>
+            </div>
+            <div class="cabecalho_2">
+                <a href="/cadastroProcesso">Processo</a>
+            </div>
+             <div class="cabecalho_3">
+                <a href="/cadastroResultado">Resultado<br> Esperado</a>
+            </div>
+            <div class="cabecalho_4">
+                <a href="/cadastroMaturidade">Nivel<br> Maturidade</a>
+            </div>
         </div>
     </div>
-    <div class="titulos">
-        <h1>Gerencia de Requisitos - PRMC</h1>
-    </div>
-    <div class="corpo">
-        <div class="corpo_1">
-            <form action="/cadastroMaturidade/incluir_maturidade" method="post" class="formulario form_flex">
-
-                <label class="corpo_label hidden" id="label_posicao_hidden">Selecione a posição do nivel</label>
-                <%= select_tag(:posicao, options_for_select([['1', 1], ['2', 2],['3', 3], ['4', 4],['5', 5], ['6', 6],['7', 7], ['8', 8],['9', 9], ['10', 10], ]), prompt: "Escolha um nivel", class: "maturidade corpo_texto_select hidden") %>
-                <label class="corpo_label hidden" id="label_nivel_hidden">Cadastre o nivel de maturidade</label>
-                <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_nivel_hidden">
-            
-            </form>
-            
+    <div class="tela_2">
+        <div class="titulos">
+            <h1>Gerencia de Requisitos - PRMC</h1>
         </div>
-        <div class="corpo_2">
-            <div class="corpo_2_1">
-                <div class="corpo_2_1_1">   
-                    <label class="corpo_label">Nivel</label>
-                    <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+        <div class="corpo">
+            <div class="corpo_2">
+                <div class="corpo_2_1">
+                    <div class="corpo_2_1_1">   
+                        <label class="corpo_label">Nivel</label>
+                        
+                        <form action="/cadastroMaturidade/incluir_maturidade" method="post" class="formulario form_flex">
+                            
+                            <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="posicao" id="input_posicao_hidden">
+                            
+                        
+                        <input type="button" value="+" onclick="funcao()" class="botao_adicionar">
+                    </div>
+                    <div class="corpo_2_1_2">   
+                        <table id="body">
+                        
+                        <% @maturidades.each do |maturidade| %>
+                            
+                            <tr>
+                                <th class="celula_editar"><form action="/cadastroMaturidade/<%= maturidade.id %>/salvar_maturidade" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="<%= maturidade.posicao %>" style="background-color:transparent; border: none;"></form></th>
+                                <th class="celula_excluir"><a href="/cadastroMaturidade/<%= maturidade.id %>/excluir_maturidade">X</a></th>
+                                
+                            </tr>
+                        <%end%>
+                        
+                        </table>
+                    </div>
+                
                 </div>
-                <div class="corpo_2_1_2">   
-                     <table id="body">
-                
-                    </table>
+                <div class="corpo_2_2">
+                    <div class="corpo_2_2_1">
+                        <label class="corpo_label">Descricao</label>
+                            
+                            <input class="corpo_texto_input hidden" placeholder="Digite aqui" type="text" name="descricao" id="input_descricao_hidden">
+                            <input type="submit" value="Submit" class="hidden">
+                        </form>
+                            
+                    
+                    </div>
+                    <div class="corpo_2_2_2">
+                        <table id="body2">
+                        <% @maturidades.each do |maturidade| %>    
+                            <tr>
+                                <th class="celula_editar"><form action="/cadastroMaturidade/<%= maturidade.id %>/salvar_maturidade" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="<%= maturidade.descricao %>" style="background-color:transparent; border: none;"></form></th>
+                                <th class="celula_excluir"><a href="/cadastroMaturidade/<%= maturidade.id %>/excluir_maturidade">X</a></th>    
+                            </tr>
+                        <%end%>
+                        
+                        </table>
+                    </div>
                 </div>
-               
-            </div>
-            <div class="corpo_2_2">
-                <label class="corpo_label">Descricao</label>
-                <table id="body2">
-        
-                    <% @maturidades.each do |maturidade| %>                
-                        <input type="hidden" readonly="readonly" class="resultMaturidade" value="<%=maturidade.posicao%>">
-                        <input type="hidden" readonly="readonly" class="descricaoMaturidade" value="<%=maturidade.descricao%>">        
-                        <input type="hidden" readonly="readonly" class="descricaoPosicao" value="<%=maturidade.posicao%>">        
-                        <input type="hidden" readonly="readonly" class="idMaturidade" value="<%=maturidade.id%>">
-                    <%end%>
-                
-                </table>
-            </div>
 
-            <div class="corpo_2_3">
-                <table id="body3">
-                
-                </table>
+                <div class="corpo_2_3">
+                    <div class="corpo_2_3_1">
+                        <label class="corpo_label">Processo</label>
+                            
+                            <% @processos.each do |processo| %> 
+                                <div class="overflow hidden" id="select_processo_hidden">
+                                    <label for = "coding"> <%=processo.descricao%> </label>
+                                    <input type = "checkbox" id = "codificação" name = "interesse" value = "codificação">
+                                </div>
+                            <%end%>
+                    
+                    </div>
+                    <div class="corpo_2_3_2">
+                        <table id="body3">
+                        <% @maturidades.each do |maturidade| %>    
+                            <tr>
+                                <th class="celula_editar"><form action="/cadastroMaturidade/<%= maturidade.id %>/salvar_maturidade" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="<%= maturidade.descricao %>" style="background-color:transparent; border: none;"></form></th>
+                                <th class="celula_excluir"><a href="/cadastroMaturidade/<%= maturidade.id %>/excluir_maturidade">X</a></th>    
+                            </tr>
+                        <%end%>
+                        
+                        </table>
+                    </div>
+                </div>
+            
             </div>
-          
         </div>
     </div>
-
 </div>
 
 <script>
-     var formulario = document.getElementsByClassName('formulario');
+    
+    var formulario = document.getElementsByClassName('formulario');
         for (var i = 0; i< formulario.length; i++){
           formulario[i].addEventListener('keydown', e => {
                 if(e.key == "Enter") {
@@ -320,82 +370,21 @@ td a{
     for (var i = 0; i< formulario.length; i++){
         formulario[i].addEventListener('keydown', e => {
             if(e.key == "Enter") {
-                console.log(e.target.parentElement);
                 e.target.parentElement.parentElement.submit();
             }
         })
     }
     }
-
-    var selectMaturidade = document.getElementsByClassName("maturidade");
-    var comparaMaturidade = document.getElementsByClassName('resultMaturidade');
-    var descricaoMaturidade = document.getElementsByClassName('descricaoMaturidade');
-    var descricaoPosicao = document.getElementsByClassName('descricaoPosicao');
-    var idMaturidade = document.getElementsByClassName('idMaturidade')
-
-    var table = document.createElement('table');
-    var thead = document.createElement('thead');
-    var tbody = document.createElement('tbody');
     
-    var table2 = document.createElement('table');
-    var thead2 = document.createElement('thead');
-    var tbody2 = document.createElement('tbody');
+    var inputPosicaoInvisivel = document.getElementById("input_posicao_hidden");
+    var inputDescricaoInvisivel = document.getElementById("input_descricao_hidden");
+    var selectProcessoInvisivel = document.getElementById("select_processo_hidden");
 
-    table.appendChild(thead);
-    table.appendChild(tbody);
-
-    table2.appendChild(thead2);
-    table2.appendChild(tbody2);
-
-    document.getElementById('body').appendChild(table);
-    document.getElementById('body2').appendChild(table2);
-
-    i = 0;
-    while( i < selectMaturidade.length) {
-        
-        selectMaturidade[i].addEventListener('change', e => {
-            e.target.nextElementSibling.value = e.target.value;
-            tbody.innerText = "";
-            tbody2.innerText = "";
-
-            for(var j = 0 ; j < comparaMaturidade.length; j++)
-            {
-                if(comparaMaturidade[j].attributes[3].nodeValue == e.target.value)
-                {
-                    var k = idMaturidade[j].attributes[3].nodeValue
-                    var row = document.createElement('tr');
-                    var heading = document.createElement('td');
-                    heading.innerHTML = descricaoPosicao[j].attributes[3].nodeValue;
-                    row.appendChild(heading);
-                    tbody.appendChild(row);
-
-                    row = document.createElement('tr');
-                    heading = document.createElement('td');
-                    heading2 = document.createElement('td');
-                    heading.innerHTML = `<form action="/cadastroMaturidade/${k}/salvar_maturidade" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="${descricaoMaturidade[j].attributes[3].nodeValue}" style="background-color:transparent; border: none;"></form>`
-                    heading2.innerHTML = `<a href=/cadastroMaturidade/${k}/excluir_maturidade>X<a>`;
-                    heading.classList.add("celula_editar");
-                    heading2.classList.add("celula_excluir");
-                    row.appendChild(heading);
-                    row.appendChild(heading2);
-                    tbody2.appendChild(row);
-                }
-
-            }
-        })         
-        i++;
-    }
-    
-    var labelPosicaoInvisivel = document.getElementById("label_posicao_hidden");
-    var selectPosicaoInvisivel = document.getElementById("posicao");
-    var labelNivelInvisivel = document.getElementById("label_nivel_hidden");
-    var inputNivelInvisivel = document.getElementById("input_nivel_hidden");
     
     function funcao(){
-        labelPosicaoInvisivel.classList.remove('hidden');
-        selectPosicaoInvisivel.classList.remove('hidden');
-        labelNivelInvisivel.classList.remove('hidden');
-        inputNivelInvisivel.classList.remove('hidden');
+        inputPosicaoInvisivel.classList.remove('hidden');
+        inputDescricaoInvisivel.classList.remove('hidden');
+        selectProcessoInvisivel.classList.remove('hidden');
     }
 </script>
 

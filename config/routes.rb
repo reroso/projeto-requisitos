@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "/cadastroResultado", to: "cadastro#indexResultado"
   get "/cadastroMaturidade", to: "cadastro#indexMaturidade"
   get "/cadastroProcessoMaturidade", to: "cadastro#indexProcessoMaturidade"
+  get "/cadastroLogin", to: "cadastro#indexLogin"
 
 
 
@@ -118,5 +119,12 @@ Rails.application.routes.draw do
   post "/cadastroProcessoMaturidade/alterar_processoMaturidade", to: "cadastro#alterar_processoMaturidade"
   post "/cadastroProcessoMaturidade/:id/salvar_processoMaturidade", to: "cadastro#salvar_processoMaturidade"
   get "/cadastroProcessoMaturidade/:id/excluir_processoMaturidade", to: "cadastro#excluir_processoMaturidade"
+
+  #login
+
+  post "/cadastro/incluir_login", to: "cadastro#incluir_login"
+  post "/cadastro/alterar_login", to: "cadastro#alterar_login"
+  post "/cadastro/:id/salvar_login", to: "cadastro#salvar_login"
+  get "/cadastro/:id/excluir_login", to: "cadastro#excluir_login"
 
 end
