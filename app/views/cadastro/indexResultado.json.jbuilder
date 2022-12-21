@@ -1,0 +1,1 @@
+json.array! @resultados, partial: "cadastro/resultado", as: :resultado

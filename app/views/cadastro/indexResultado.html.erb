@@ -89,6 +89,21 @@ html, body {
     flex-direction: column;
     text-align: center;
 }
+.corpo_2_1_1{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.corpo_2_1_2{
+    display: flex;
+    height: 95%;
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+}
 .corpo_2_2{
     display: flex;
     height: 100%;
@@ -102,7 +117,7 @@ html, body {
     flex-direction: row;
     text-align: center;
     align-items: center;
-    justify-content: space-evenly; 
+    justify-content: space-evenly;
 }
 .corpo_2_2_2{
     display: flex;
@@ -158,6 +173,7 @@ A{
     font-size: 20px;
     line-height: 21px;
     color: #6C757D;
+    max-width: 300px;
 }
 .corpo_texto_input{
     font-family: 'Inter';
@@ -213,6 +229,7 @@ td{
 .celula_editar{
     border-width: 1px 0 1px 1px;
     position: relative;
+    width: 100%;
 }
 .celula_excluir{
     border-width: 1px 1px 1px 0;
@@ -236,6 +253,7 @@ td a{
     font-size: 16px;
     line-height: 21px;
     color: #152536;
+    width: 100%;
 }
 </style>
 </head>
@@ -265,20 +283,21 @@ td a{
         <div class="corpo">
             <div class="corpo_2">
                 <div class="corpo_2_1">
-                    <label class="corpo_label">Dimensões</label>
-                    <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensao", class: "dimensao corpo_texto_select" %>
-                    
-                    <table id="body">
+                    <div class="corpo_2_1_1">
+                        <label class="corpo_label">Dimensões</label>
+                        <%= select_tag "dimensao_id", options_from_collection_for_select(@dimensaos, "id", "descricao"), prompt: "Escolha uma dimensao", class: "dimensao corpo_texto_select" %>
+                    </div>
+                    <div class="corpo_2_1_2">
+                        <table id="body">
 
-                    </table>
-                
+                        </table>
+                    </div>
                 </div>
                 <div class="corpo_2_2">
                     <div class="corpo_2_2_1">
                         <label class="corpo_label">Processos</label>
-                        <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario form_flex">
-                            <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select" %>
-                            
+                        <form action="/cadastroResultado/incluir_resultado" method="post" class="formulario form_flex">                          
+                            <%= select_tag "processo_id", options_from_collection_for_select(@processos, "id", "descricao"), prompt: "Escolha um processo", class: "processo corpo_texto_select" %>   
                     </div>
                     <div class="corpo_2_2_2">
                         <table id="body2">
@@ -376,6 +395,7 @@ td a{
     while( i < selectprocesso.length) {
         
         selectprocesso[i].addEventListener('change', e => {
+            
             //e.target.nextElementSibling.value = e.target.value;
             tbody.innerText = "";
             tbody2.innerText = "";
@@ -385,24 +405,13 @@ td a{
             {
                 if(compararesultado[j].attributes[3].nodeValue == e.target.value)
                 {
-                    
-                    var k = idResultado[j].attributes[3].nodeValue
-                    var row = document.createElement('tr');
-                    var heading = document.createElement('td');
-                    heading.innerHTML = descricaoDimensao[j].attributes[3].nodeValue;
-                    row.appendChild(heading);
-                    tbody.appendChild(row);
-
-                    row = document.createElement('tr');
-                    heading = document.createElement('td');
-                    heading.innerHTML = descricaoProcesso[j].attributes[3].nodeValue;
-                    row.appendChild(heading);
-                    tbody2.appendChild(row);
-
+                    var k
+                    var row
+                    var heading
                     row = document.createElement('tr');
                     heading = document.createElement('td');
                     heading2 = document.createElement('td');
-                    heading.innerHTML = `<form action="/cadastroResultado/${k}/salvar_resultado" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="${descricaoResultado[j].attributes[3].nodeValue}" style="background-color:transparent; border: none;"></form>`
+                    heading.innerHTML = `<form action="/cadastroResultado/${k}/salvar_resultado" method="post" class="formulario"><textarea class="corpo_edita_input" name ="descricao" type="text" name="descricao" style="background-color:transparent; border: none;">${descricaoResultado[j].attributes[3].nodeValue}</textarea></form>`
                     heading2.innerHTML = `<a href=/cadastroResultado/${k}/excluir_resultado>X<a>`;
                     heading.classList.add("celula_editar");
                     heading2.classList.add("celula_excluir");
@@ -427,7 +436,24 @@ td a{
     }
 
     
+
+    $(document).ready(function(){
+        
+        $(".corpo_2_1 #dimensao_id").change(function(){
+            $.ajax( "cadastroProcesso.json?dimensao_id=" + this.value )
+                .done(function(data) {
+                    var htmlOptions = "<option>Escolha um processo</option>";
+                    for(var i=0; i<data.length; i++){
+                    htmlOptions += "<option value='"+data[i].id+"'>" + data[i].descricao + "</option>"
+                    } 
+                    $(".corpo_2_2 #processo_id").html(htmlOptions);
+                })
+                .fail(function() {
+                    alert("error");
+                })
+        });
     
+    });
     
 </script>
 

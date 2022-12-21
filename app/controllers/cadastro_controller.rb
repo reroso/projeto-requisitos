@@ -9,12 +9,22 @@ class CadastroController < ApplicationController
         @dimensaos = Dimensao.all
         @processos = Processo.all
         @resultados = Resultado.all
+
+        if params[:dimensao_id].present?
+          @processos = @processos.where(dimensao_id: params[:dimensao_id])
+        end
+        @processos
     end
 
     def indexResultado
       @dimensaos = Dimensao.all
       @processos = Processo.all
       @resultados = Resultado.all
+
+      if params[:processo_id].present?
+        @resultados = @resultados.where(processo_id: params[:processo_id])
+      end
+      @resultados
     end
 
     def indexMaturidade
@@ -31,6 +41,7 @@ class CadastroController < ApplicationController
     end
 
     def indexLogin
+      
     end
 
     #dimensao
@@ -186,5 +197,38 @@ class CadastroController < ApplicationController
     processoMaturidade = ProcessoMaturidade.new
     processoMaturidade.descricao = params[:descricao]
     processoMaturidade.save
+  end
+
+  #modelo de maturidade
+
+  def incluir_login
+    modeloMaturidade = ModeloMaturidade.new
+    modeloMaturidade.nome = params[:nome]
+    modeloMaturidade.descricao = params[:descricao]
+    modeloMaturidade.save
+    
+    redirect_to "/cadastroLogin"
+  end
+
+  def salvar_login
+    modeloMaturidade = ModeloMaturidade.find(params[:id])
+    modeloMaturidade.nome = params[:nome]
+    modeloMaturidade.descricao = params[:descricao]
+    modeloMaturidade.save
+
+    redirect_to "/cadastroLogin"
+  end
+
+  def excluir_login
+    modeloMaturidade = ModeloMaturidade.find(params[:id])
+    modeloMaturidade.destroy
+    redirect_to "/cadastroLogin"
+  end
+
+  def alterar_login
+    modeloMaturidade = ModeloMaturidade.new
+    modeloMaturidade.nome = params[:nome]
+    modeloMaturidade.descricao = params[:descricao]
+    modeloMaturidade.save
   end
 end

@@ -216,6 +216,7 @@ td{
 .celula_editar{
     border-width: 1px 0 1px 1px;
     position: relative;
+    width: 100%;
 }
 .celula_excluir{
     border-width: 1px 1px 1px 0;
@@ -286,9 +287,9 @@ td a{
                 <div class="corpo_2_2">
                     <div class="corpo_2_2_1">
                         <label class="corpo_label">Processos</label>
-                            <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao" id="input_processo_hidden">
-                            <input type="submit" value="+" class="botao_adicionar" id="click_button">
-                        </form>
+                                <input class="corpo_texto_input" placeholder="Digite aqui" type="text" name="descricao" id="input_processo_hidden">
+                                <input type="submit" value="+" class="botao_adicionar" id="click_button">
+                            </form>
                     </div>
                     <div class="corpo_2_2_2">
                         <table id="body2">
@@ -316,7 +317,8 @@ td a{
 <script>
     var formulario = document.getElementsByClassName('formulario');
         for (var i = 0; i< formulario.length; i++){
-          formulario[i].addEventListener('keydown', e => {
+            
+            formulario[i].addEventListener('keydown', e => {
                 if(e.key == "Enter") {
                     e.target.parentElement.parentElement.submit();
                 }
@@ -329,6 +331,7 @@ td a{
     for (var i = 0; i< formulario.length; i++){
         formulario[i].addEventListener('keydown', e => {
             if(e.key == "Enter") {
+                console.log(e.target.parentElement);
                 e.target.parentElement.parentElement.submit();
             }
         })
@@ -376,7 +379,7 @@ td a{
                     var row = document.createElement('tr');
                     var heading = document.createElement('td');
                     heading2 = document.createElement('td'); 
-                    heading.innerHTML = `<form action="/cadastroProcesso/${k}/salvar_processo" method="post" class="formulario"><input class="corpo_edita_input" name ="descricao" type="text" name="descricao" value="${descricaoProcesso[j].attributes[3].nodeValue}" style="background-color:transparent; border: none;"></form>`
+                    heading.innerHTML = `<form action="/cadastroProcesso/${k}/salvar_processo" method="post" class="formulario"><textarea class="corpo_edita_input" name ="descricao" type="text" name="descricao" style="background-color:transparent; border: none;">${descricaoProcesso[j].attributes[3].nodeValue}</textarea></form>`
                     heading2.innerHTML = `<a href=/cadastroProcesso/${k}/excluir_processo>X<a>`;
                     heading.classList.add("celula_editar");
                     heading2.classList.add("celula_excluir");

@@ -2,66 +2,131 @@
 <html>
 <head>
 <style>
+html, body {
+  height: 100%;
+  width: 100%;
+  background: grey;
+}
+.tela{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+}
+.tela_1{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.tela_2{
+    height: 85%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.caixa{
+    padding: 16px;
+    box-shadow: 0 2px 2px -1px;
+    width: 310px;
+    min-height: 10px;
+    margin: 25px 0;
+    border-radius: 10px;
+    font-weight: 200;
+    font-size: 40px;
+}
+.modal{
+    margin-left: 25%;
+    margin-top: 10%;
+    position: fixed;
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+}
+.hidden{
+    display: none;
+}
+.input_text{
+    font: 1em sans-serif;
+    width: 300px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+.legenda{
+    margin-left: auto;
+    margin-right: auto;
+}
+.botao_fechar{
+    margin-left: 60%;
+}
+.form{
+  
+}
 </style>
 </head>
 <body>
-    <div class="row">
-  <div class="container login col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
-    <br />
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h1 class="title-login">Login</h1>
-      </div>
-      <div class="panel-body">
-        <form method="post">
-          <div class="form-group">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-user" style="width: auto"></i>
-              </span>
-              <input id="txtUsuario" runat="server" type="text" class="form-control" name="username" placeholder="Usuário" required="" />
+<div id="modal-container" class="modal hidden">
+    <input type="button" class="botao_fechar"value="X">
+    <fieldset class="form">
+        <legend class="legenda">Cadastre o novo modelo</legend>
+        
+        <form action="/cadastroLogin/incluir_login" method="post" class="formulario">
+            <div class="form">
+
+                <input type="text" name="nome" class="input_text" placeholder="Digite o nome">
+                <input type="text" name="descricao" class="input_text" placeholder="Digite a descricao">
             </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <span class="input-group-addon">
-                <i class="glyphicon glyphicon-lock" style="width: auto"></i>
-              </span>
-              <input id="txtSenha" runat="server" type="password" class="form-control" name="password" placeholder="Senha" required="" />
-            </div>
-          </div>
-          <!--div class="alert alert-danger">
-            <strong>Atenção!</strong> Usuário e/ou senha incorretos.
-          </div-->
-          <div>
-            <input class="btn btn-xm btn-block btn-entrar" type="submit" value="Entrar" onclick="return Login()" />
-          </div>
         </form>
-      </div>
-    </div>
-  </div>
+    </fieldset>
 </div>
+    <div class="tela">
+        <div class="tela_1">
+            <h1 class="titulo">Cadastrar Modelo de Maturidade</h1>
+        </div>
+        <div class="tela_2">
+            
+            <button type="button" class="caixa">Cadastre novo modelo</button>
+            <button type="button" class="caixa">Selecionar Modelo</button>
+    
+        </div>
+
+    </div>
 
 <script>
-    var usuarios = [
-    {"login": "bcf", "senha": "bcf"},
-    {"login": "mamae", "senha": "abacaxi"},
-    {"login": "papai", "senha": "melancia"},
-    ];
-
-    function Login() {
-        var usuario = document.getElementsByName('username')[0].value.toLowerCase();
-        var senha = document.getElementsByName('password')[0].value;
-
-        for (var u in usuarios) {
-            var us = usuarios[u];
-            if (us.login === usuario && us.senha === senha) {
-                window.location = "index.html";
-                return true;
-            }
+    var formulario = document.getElementsByClassName('formulario');
+        for (var i = 0; i< formulario.length; i++){
+          formulario[i].addEventListener('keydown', e => {
+                if(e.key == "Enter") {
+                    e.target.parentElement.parentElement.submit();
+                }
+            })
         }
-        alert("Dados incorretos, tente novamente.");
-        return false;
+      
+    function addEventListenerToForm() {
+    
+    var formulario = document.getElementsByClassName('formulario');
+    for (var i = 0; i< formulario.length; i++){
+        formulario[i].addEventListener('keydown', e => {
+            if(e.key == "Enter") {
+                console.log(e.target.parentElement);
+                e.target.parentElement.parentElement.submit();
+            }
+        })
+    }
     }
 </script>
 </body>

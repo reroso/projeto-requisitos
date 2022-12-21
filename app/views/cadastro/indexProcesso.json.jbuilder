@@ -1,0 +1,1 @@
+json.array! @processos, partial: "cadastro/processo", as: :processo

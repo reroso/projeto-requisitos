@@ -8,8 +8,6 @@ Rails.application.routes.draw do
   get "/cadastroProcessoMaturidade", to: "cadastro#indexProcessoMaturidade"
   get "/cadastroLogin", to: "cadastro#indexLogin"
 
-
-
   ##Rotas da tela principal
 
   #Fornecedores
@@ -90,6 +88,7 @@ Rails.application.routes.draw do
   post "/cadastro/alterar_dimensao", to: "cadastro#alterar_dimensao"
   post "/cadastro/:id/salvar_dimensao", to: "cadastro#salvar_dimensao"
   get "/cadastro/:id/excluir_dimensao", to: "cadastro#excluir_dimensao"
+  get '/cadastro/:id', to: 'cadastro#mostrar'
 
   #processos
   
@@ -97,6 +96,7 @@ Rails.application.routes.draw do
   post "/cadastroProcesso/alterar_processo", to: "cadastro#alterar_processo"
   post "/cadastroProcesso/:id/salvar_processo", to: "cadastro#salvar_processo"
   get "/cadastroProcesso/:id/excluir_processo", to: "cadastro#excluir_processo"
+  get '/cadastroProcesso/:id', to: 'cadastro#mostrar_processo'
 
   #resultados
   
@@ -104,7 +104,7 @@ Rails.application.routes.draw do
   post "/cadastroResultado/alterar_resultado", to: "cadastro#alterar_resultado"
   post "/cadastroResultado/:id/salvar_resultado", to: "cadastro#salvar_resultado"
   get "/cadastroResultado/:id/excluir_resultado", to: "cadastro#excluir_resultado"
-
+  get '/cadastroResultado/:id', to: 'cadastro#mostrar_resultado'
   
   #maturidades
     
@@ -122,9 +122,9 @@ Rails.application.routes.draw do
 
   #login
 
-  post "/cadastro/incluir_login", to: "cadastro#incluir_login"
-  post "/cadastro/alterar_login", to: "cadastro#alterar_login"
-  post "/cadastro/:id/salvar_login", to: "cadastro#salvar_login"
-  get "/cadastro/:id/excluir_login", to: "cadastro#excluir_login"
+  post "/cadastroLogin/incluir_login", to: "cadastro#incluir_login"
+  post "/cadastroLogin/alterar_login", to: "cadastro#alterar_login"
+  post "/cadastroLogin/:id/salvar_login", to: "cadastro#salvar_login"
+  get "/cadastroLogin/:id/excluir_login", to: "cadastro#excluir_login"
 
 end
